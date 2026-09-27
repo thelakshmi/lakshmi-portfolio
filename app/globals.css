@@ -1,26 +1,958 @@
-@import "tailwindcss";
+/* ------------------------------------------------------------------
+   PALETTE — global and fixed for the whole website
+   Background        : light beige
+   Primary accent    : blue
+   Secondary accent  : pink
+   Blue and pink are used for text, illustrations, interactive
+   elements and visual details. There is no dark variant — the light
+   beige direction is the palette for the entire site.
+------------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------
+   TYPE
+   Player Mode
+     main heading / hero : Brittany Signature
+     subheadings + body  : Fredoka
+   Recruiter Mode
+     headings            : Space Grotesk Semibold/Bold
+     body                : DM Sans Regular/Medium
+
+   Fredoka, Space Grotesk and DM Sans are loaded in app/layout.tsx
+   with next/font. Brittany Signature is not a Google font, so it is
+   declared here with @font-face: it resolves from an installed copy
+   of the font, or from /public/fonts/brittany-signature.woff2 once
+   the licensed font file is added to the project.
+------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Brittany Signature";
+  src:
+    local("Brittany Signature"),
+    url("/fonts/brittany-signature.woff2") format("woff2"),
+    url("/fonts/brittany-signature.ttf") format("truetype");
+  font-display: swap;
+}
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ---- colour tokens ---- */
+  --color-beige: #edebdb;
+  --color-beige-soft: #f5f3e7;
+  --color-beige-panel: #f9f7ee;
+
+  --color-ink: #1a2440;
+
+  --color-blue: #2a5ca8;
+  --color-blue-deep: #16305c;
+
+  --color-pink: #d8006f;
+  --color-pink-soft: #e8449a;
+  --color-rose: #db8084;
+
+  --color-slate: #55617a;
+  --color-white: #ffffff;
+
+  --blue-rgb: 42 83 166;
+  --pink-rgb: 216 0 111;
+
+  /* ---- legacy colour names still read by the existing section styles ---- */
+  --black: var(--color-beige);
+  --black-soft: var(--color-beige-soft);
+  --panel-solid: var(--color-beige-panel);
+  --cream: var(--color-ink);
+  --yellow: var(--color-pink);
+  --yellow-soft: var(--color-pink-soft);
+  --accent-text: var(--color-blue);
+  --accent-ink: var(--color-white);
+  --purple: var(--color-blue);
+  --purple-dark: var(--color-blue-deep);
+  --lavender: #47648c;
+  --orange: var(--color-rose);
+  --muted: var(--color-slate);
+  --alert: var(--color-pink);
+
+  --line: rgba(26, 36, 64, 0.15);
+  --panel: rgba(26, 36, 64, 0.04);
+  --dock-bg: rgba(245, 243, 231, 0.82);
+  --stroke: rgba(26, 36, 64, 0.3);
+
+  /* no mono family is specified for the site — the legacy terminal
+     styles fall back to the system monospace */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ------------------------------------------------------------------
+   MODE TYPE SYSTEM
+   The active mode lives on <html data-mode="player" | "recruiter">:
+   it is set before first paint by the inline script in app/layout.tsx
+   and changed at runtime through lib/mode.ts. A subtree can scope
+   itself with the matching .mode-player / .mode-recruiter class.
+------------------------------------------------------------------- */
+
+:root,
+.mode-player,
+html[data-mode="player"] {
+  --font-hero: "Brittany Signature", "Segoe Script", "Bradley Hand", "Snell Roundhand", cursive;
+  --font-heading: var(--font-fredoka), "Fredoka", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-fredoka), "Fredoka", ui-sans-serif, system-ui, sans-serif;
+
+  /* legacy font name read by the existing section styles */
+  --font-title: var(--font-heading);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.mode-recruiter,
+html[data-mode="recruiter"] {
+  --font-hero: var(--font-space-grotesk), "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-space-grotesk), "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-dm-sans), "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* legacy font name read by the existing section styles */
+  --font-title: var(--font-heading);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-body);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+}
+
+.portfolio {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(
+      circle at 75% 45%,
+      rgb(var(--blue-rgb) / 0.14),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 55% 75%,
+      rgb(var(--pink-rgb) / 0.07),
+      transparent 25%
+    ),
+    var(--black);
+}
+
+
+/* -------------------------
+   GRAIN
+------------------------- */
+
+.portfolio::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.045;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+
+  z-index: 100;
+}
+
+
+/* -------------------------
+   TOP NAV
+------------------------- */
+
+.top-nav {
+  position: relative;
+
+  height: 90px;
+
+  padding: 0 5vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  z-index: 20;
+}
+
+.logo {
+  font-family: var(--font-body);
+
+  font-size: 25px;
+
+  font-weight: 800;
+
+  letter-spacing: -0.04em;
+}
+
+.logo span {
+  color: var(--accent-text);
+}
+
+
+/* -------------------------
+   PERSISTENT CONTROLS
+   The top-right cluster is fixed so the mode switch stays
+   reachable while browsing. It holds the Recruiter/Player toggle
+   and, in Player Mode only, the circular hamburger button.
+------------------------- */
+
+.nav-actions {
+  position: fixed;
+
+  top: 26px;
+  right: 5vw;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+/* -------------------------
+   MODE SWITCH
+   A compact ON/OFF toggle between Recruiter Mode and Player Mode.
+   It only flips <html data-mode> through lib/mode.ts — it never
+   navigates — and its label always names the active mode.
+------------------------- */
+
+.mode-switch {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  height: 38px;
+  padding: 0 13px;
+
+  border: 1px solid var(--line);
+  border-radius: 100px;
+
+  background: var(--color-beige-panel);
+
+  transition: border-color 0.25s ease;
+}
+
+.mode-switch:hover {
+  border-color: var(--accent-text);
+}
+
+.mode-switch-label {
+  font-family: var(--font-body);
+
+  font-size: 10px;
+
+  letter-spacing: 0.12em;
+
+  color: var(--accent-text);
+}
+
+.mode-switch-track {
+  position: relative;
+
+  width: 34px;
+  height: 16px;
+
+  border: 1px solid var(--line);
+  border-radius: 100px;
+
+  background: var(--color-beige-soft);
+}
+
+.mode-switch-knob {
+  position: absolute;
+
+  top: 1px;
+  left: 1px;
+
+  width: 12px;
+  height: 12px;
+
+  border-radius: 50%;
+
+  background: var(--color-blue);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.mode-switch.is-recruiter .mode-switch-label {
+  color: var(--color-pink);
+}
+
+.mode-switch.is-recruiter .mode-switch-knob {
+  transform: translateX(18px);
+
+  background: var(--color-pink);
+}
+
+
+/* -------------------------
+   PLAYER MODE MENU
+   One circular hamburger button in the top-right corner. It opens
+   the four section links and nothing else — it never becomes a
+   navigation bar, and it does not appear in Recruiter Mode.
+------------------------- */
+
+.player-menu {
+  position: relative;
+}
+
+.menu-button {
+  display: grid;
+  place-items: center;
+
+  width: 44px;
+  height: 44px;
+
+  border: 1px solid var(--line);
+  border-radius: 50%;
+
+  background: var(--color-beige-panel);
+
+  transition: border-color 0.25s ease;
+}
+
+.menu-button:hover {
+  border-color: var(--accent-text);
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  width: 17px;
+}
+
+.menu-icon span {
+  display: block;
+
+  height: 1.5px;
+
+  border-radius: 2px;
+
+  background: var(--color-ink);
+}
+
+.menu-panel {
+  position: absolute;
+
+  top: calc(100% + 10px);
+  right: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  min-width: 180px;
+
+  padding: 9px;
+
+  border: 1px solid var(--line);
+  border-radius: 18px;
+
+  background: var(--color-beige-panel);
+
+  box-shadow: 0 16px 44px rgb(var(--blue-rgb) / 0.16);
+}
+
+.menu-panel a {
+  padding: 9px 13px;
+
+  border-radius: 11px;
+
+  font-family: var(--font-body);
+
+  font-size: 14px;
+
+  color: var(--cream);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.menu-panel a:hover {
+  background: var(--color-beige-soft);
+
+  color: var(--accent-text);
+}
+
+
+/* -------------------------
+   HERO
+------------------------- */
+
+.hero {
+  position: relative;
+
+  min-height: calc(100vh - 90px);
+
+  padding: 9vh 10vw 150px 12vw;
+
+  display: flex;
+  align-items: center;
+}
+
+.hero-content {
+  position: relative;
+
+  z-index: 5;
+
+  max-width: 540px;
+}
+
+.hero-small {
+  margin: 0 0 25px;
+
+  font-family: var(--font-body);
+
+  font-size: 11px;
+
+  color: var(--accent-text);
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.12em;
+}
+
+.hero-title {
+  margin: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  font-family: var(--font-body);
+
+  font-size: clamp(76px, 10vw, 145px);
+
+  font-weight: 800;
+
+  line-height: 0.86;
+
+  letter-spacing: -0.05em;
+}
+
+.hero-title-line {
+  display: block;
+}
+
+.yellow {
+  color: var(--yellow);
+}
+
+.hero-description {
+  margin-top: 42px;
+
+  font-family: var(--font-body);
+
+  font-size: 13px;
+
+  line-height: 1.8;
+
+  color: var(--muted);
+}
+
+.explore-button {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 20px;
+
+  margin-top: 34px;
+
+  padding: 14px 21px;
+
+  background: var(--yellow);
+
+  color: var(--accent-ink);
+
+  border-radius: 100px;
+
+  font-family: var(--font-body);
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.explore-button:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 10px 40px rgb(var(--pink-rgb) / 0.22);
+}
+
+.explore-button span {
+  font-size: 17px;
+}
+
+
+/* -------------------------
+   ABSTRACT SCENE
+------------------------- */
+
+.scene {
+  position: absolute;
+
+  right: 8vw;
+  top: 50%;
+
+  width: min(48vw, 680px);
+  height: min(48vw, 680px);
+
+  transform: translateY(-50%);
+
+  z-index: 1;
+}
+
+.scene-glow {
+  position: absolute;
+
+  width: 65%;
+  height: 65%;
+
+  top: 18%;
+  left: 18%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgb(var(--blue-rgb) / 0.22),
+      transparent 65%
+    );
+
+  filter: blur(25px);
+}
+
+.floating-orb {
+  position: absolute;
+
+  width: 80px;
+  height: 80px;
+
+  top: 12%;
+  right: 23%;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--yellow) 0 48%,
+      var(--orange) 48% 100%
+    );
+
+  box-shadow:
+    0 0 50px rgb(var(--pink-rgb) / 0.16);
+}
+
+.planet-small {
+  position: absolute;
+
+  width: 38px;
+  height: 38px;
+
+  top: 34%;
+  left: 10%;
+
+  border-radius: 50%;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--orange),
+      var(--purple)
+    );
+}
+
+.orbit {
+  position: absolute;
+
+  border: 1px solid rgb(143 161 177 / 0.7);
+
+  border-radius: 50%;
+}
+
+.orbit-one {
+  width: 80%;
+  height: 31%;
+
+  top: 45%;
+  left: 5%;
+
+  transform: rotate(-8deg);
+}
+
+.orbit-two {
+  width: 65%;
+  height: 25%;
+
+  top: 48%;
+  left: 17%;
+
+  transform: rotate(20deg);
+
+  border-color: rgb(var(--pink-rgb) / 0.4);
+}
+
+.portal {
+  position: absolute;
+
+  left: 36%;
+  top: 28%;
+
+  width: 190px;
+  height: 300px;
+}
+
+.portal-back {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple),
+      var(--purple-dark)
+    );
+
+  clip-path: polygon(
+    22% 0,
+    100% 6%,
+    100% 78%,
+    50% 100%,
+    0 80%,
+    0 13%
+  );
+
+  opacity: 0.65;
+}
+
+.portal-front {
+  position: absolute;
+
+  left: 30px;
+  top: 45px;
+
+  width: 135px;
+  height: 205px;
+
+  background:
+    linear-gradient(
+      140deg,
+      #f7d7df,
+      var(--orange)
+    );
+
+  clip-path: polygon(
+    10% 0,
+    100% 8%,
+    100% 100%,
+    0 100%,
+    0 8%
+  );
+}
+
+.stairs {
+  position: absolute;
+
+  bottom: -45px;
+  left: -30px;
+
+  width: 200px;
+}
+
+.stairs span {
+  display: block;
+
+  height: 22px;
+
+  margin-top: 4px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--purple-dark),
+      var(--orange)
+    );
+
+  transform: perspective(100px) rotateX(10deg);
+}
+
+.figure {
+  position: absolute;
+
+  left: 46%;
+  bottom: 19%;
+
+  width: 15px;
+  height: 65px;
+
+  background: #101728;
+
+  border-radius: 50% 50% 15% 15%;
+
+  z-index: 4;
+}
+
+.figure::before {
+  content: "";
+
+  position: absolute;
+
+  width: 18px;
+  height: 18px;
+
+  top: -15px;
+  left: -1px;
+
+  border-radius: 50%;
+
+  background: #101728;
+}
+
+
+/* -------------------------
+   SCRIBBLES
+------------------------- */
+
+.scribble {
+  position: absolute;
+
+  z-index: 5;
+
+  font-family: var(--font-title);
+
+  font-size: 15px;
+
+  line-height: 1.75;
+
+  color: var(--cream);
+
+  transform: rotate(-5deg);
+
+  opacity: 0.85;
+}
+
+.scribble span {
+  display: block;
+
+  color: var(--accent-text);
+
+  font-size: 20px;
+}
+
+.scribble-one {
+  right: 3vw;
+  top: 30%;
+
+  color: var(--accent-text);
+}
+
+.scribble-two {
+  left: 7vw;
+  bottom: 16%;
+
+  color: var(--cream);
+
+  transform: rotate(-8deg);
+}
+
+
+/* -------------------------
+   MOBILE
+------------------------- */
+
+@media (max-width: 900px) {
+
+  .hero {
+    padding:
+      8vh
+      8vw
+      150px;
+  }
+
+  .scene {
+    position: absolute;
+
+    width: 90vw;
+    height: 90vw;
+
+    right: -25vw;
+
+    opacity: 0.55;
+  }
+
+  .hero-content {
+    max-width: 90%;
+  }
+
+  .hero-title {
+    font-size: clamp(68px, 18vw, 120px);
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .top-nav {
+    height: 70px;
+
+    padding: 0 6vw;
+  }
+
+  .nav-actions {
+    top: 18px;
+    right: 6vw;
+
+    gap: 10px;
+  }
+
+  .mode-switch {
+    height: 34px;
+    padding: 0 11px;
+
+    gap: 8px;
+  }
+
+  .menu-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .hero {
+    min-height: calc(100vh - 70px);
+
+    padding:
+      8vh
+      7vw
+      130px;
+
+    align-items: flex-start;
+  }
+
+  .hero-title {
+    font-size: 20vw;
+  }
+
+  .hero-description {
+    font-size: 11px;
+  }
+
+  .scene {
+    width: 120vw;
+    height: 120vw;
+
+    right: -45vw;
+
+    top: 58%;
+
+    opacity: 0.3;
+  }
+
+  .scribble {
+    display: none;
+  }
+}
+
+
+/* -------------------------
+   CUSTOM CURSOR
+   A subtle, palette-matching pointer drawn as an inline SVG data
+   URI: no script, no extra dependency, and it can never interfere
+   with navigation or gameplay. Every cursor keeps a native fallback
+   and text fields keep a text cursor so selection stays normal.
+------------------------- */
+
+:root {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M5 3 L5 20 L9.7 15.6 L12.6 21.6 L15.6 20.2 L12.7 14.4 L19 14 Z' fill='%23f5f3e7' stroke='%232a5ca8' stroke-width='1.7' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E")
+      5 3,
+    default;
+}
+
+/* interactive elements: blue ring with a pink centre */
+:root :is(a, button, select, summary, [role="button"], [onclick]) {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'%3E%3Ccircle cx='13' cy='13' r='9' fill='%23f5f3e7' fill-opacity='.95' stroke='%232a5ca8' stroke-width='1.8'/%3E%3Ccircle cx='13' cy='13' r='3.4' fill='%23d8006f'/%3E%3C/svg%3E")
+      13 13,
+    pointer;
+}
+
+/* text entry: ink-coloured I-beam */
+:root :is(
+    input[type="text"],
+    input[type="email"],
+    input[type="search"],
+    input[type="url"],
+    input:not([type]),
+    textarea,
+    [contenteditable="true"]
+  ) {
+  cursor:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='22' height='26' viewBox='0 0 22 26'%3E%3Cpath d='M6.5 3 H15.5 M11 3 V23 M6.5 23 H15.5 M11 9 V12 M11 17 V20' fill='none' stroke='%231a2440' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E")
+      11 13,
+    text;
+}
+
+
+/* -------------------------
+   CUSTOM SCROLLBAR
+   Thin, rounded, light beige track with a blue thumb that turns
+   pink on hover. Firefox uses scrollbar-color, WebKit browsers the
+   ::-webkit-scrollbar block — both stay fully functional.
+------------------------- */
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-blue) var(--color-beige-soft);
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-beige-soft);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-blue);
+
+  border: 3px solid var(--color-beige-soft);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-pink);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--color-beige-soft);
 }
