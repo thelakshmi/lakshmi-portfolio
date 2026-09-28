@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import TopNav from "@/components/TopNav";
 import Hero from "@/components/Hero";
@@ -11,22 +11,27 @@ import Skills from "@/components/Skills";
 import Journey from "@/components/Journey";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import RecruiterAbout from "@/components/RecruiterAbout";
 import { CursorGlow, ScrollProgress } from "@/components/Chrome";
-import IntroGate from "@/components/IntroGate";
 
 import { burst } from "@/lib/confetti";
+import { getMode, subscribeMode, useMode } from "@/lib/mode";
 
 export default function Home() {
-  /* the welcome card sits on top until the visitor picks a door */
-  const [entered, setEntered] = useState(false);
-  const enterSite = useCallback(() => setEntered(true), []);
+  /* the two modes of the site swap through the existing mode system:
+     useMode() tracks <html data-mode>, set by the ModeSwitch toggle.
+     Exactly one view is mounted at a time, so #about never exists
+     twice in the document. */
+  const mode = useMode();
+  const recruiter = mode === "recruiter";
 
-  /* easter egg #2: type my name anywhere on the page */
+  /* easter egg #2: type my name anywhere on the page (Player Mode only) */
   useEffect(() => {
     let buffer = "";
 
     const onKey = (event: KeyboardEvent) => {
       if (event.key.length !== 1) return;
+      if (getMode() !== "player") return;
 
       buffer = (buffer + event.key.toLowerCase()).slice(-8);
 
@@ -40,23 +45,35 @@ export default function Home() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  /* switching modes always starts the new mode at the top of the page */
+  useEffect(() => {
+    return subscribeMode(() => {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    });
+  }, []);
+
   return (
     <>
-      {!entered && <IntroGate onEnter={enterSite} />}
-
-      {/* re-keys the site so every intro animation plays on entering */}
-      <main className="portfolio" key={entered ? "site" : "boot"}>
+      <main className="portfolio">
         <CursorGlow />
-
         <TopNav />
-        <Hero />
-        <About />
-        <Projects />
-        <AiLab />
-        <Skills />
-        <Journey />
-        <Contact />
-        <Footer />
+
+        {recruiter ? (
+          <div className="mode-recruiter">
+            <RecruiterAbout />
+          </div>
+        ) : (
+          <div className="mode-player">
+            <Hero />
+            <About />
+            <Projects />
+            <AiLab />
+            <Skills />
+            <Journey />
+            <Contact />
+            <Footer />
+          </div>
+        )}
       </main>
 
       <ScrollProgress />

@@ -109,6 +109,28 @@ html[data-mode="recruiter"] {
   --font-title: var(--font-heading);
 }
 
+/* ------------------------------------------------------------------
+   MODE VIEWS
+   Only the active mode's view is mounted (React swaps them through
+   useMode in app/page.tsx). These rules keep the server-rendered
+   Player HTML invisible before hydration whenever the saved mode is
+   recruiter, so a reload in Recruiter Mode never paints Player
+   Mode content first.
+------------------------------------------------------------------- */
+
+html[data-mode="recruiter"] .mode-player {
+  display: none;
+}
+
+html:not([data-mode="recruiter"]) .mode-recruiter {
+  display: none;
+}
+
+/* the Player hamburger never paints in Recruiter Mode */
+html[data-mode="recruiter"] .player-menu {
+  display: none;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -397,7 +419,11 @@ button {
 
 
 /* -------------------------
-   HERO
+   HERO — OPENING SECTION
+   A full-screen illustrated scrapbook: painted washes, paper
+   texture, torn + taped pieces, clouds across the lower portion
+   and hand-drawn sparkles, behind a Brittany Signature title.
+   Palette stays light beige + blue + pink.
 ------------------------- */
 
 .hero {
@@ -405,10 +431,13 @@ button {
 
   min-height: calc(100vh - 90px);
 
-  padding: 9vh 10vw 150px 12vw;
+  overflow: hidden;
+
+  padding: 10vh 8vw 30vh;
 
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .hero-content {
@@ -416,58 +445,434 @@ button {
 
   z-index: 5;
 
-  max-width: 540px;
+  width: 100%;
+  max-width: 980px;
+
+  text-align: center;
 }
 
-.hero-small {
-  margin: 0 0 25px;
-
-  font-family: var(--font-body);
-
-  font-size: 11px;
-
-  color: var(--accent-text);
-
-  text-transform: uppercase;
-
-  letter-spacing: 0.12em;
-}
-
+/* the title, painted straight onto the scene */
 .hero-title {
+  position: relative;
+
   margin: 0;
+
+  padding: 0.16em 0.3em 0.24em;
+
+  font-family: var(--font-hero);
+
+  font-size: clamp(54px, 8.6vw, 132px);
+
+  font-weight: 400;
+
+  line-height: 1.06;
+
+  color: var(--color-blue);
+
+  rotate: -1.6deg;
+
+  background: radial-gradient(
+    58% 62% at 50% 50%,
+    rgb(var(--pink-rgb) / 0.12),
+    transparent 74%
+  );
+}
+
+/* hand-drawn underline */
+.hero-underline {
+  position: absolute;
+
+  left: 50%;
+  bottom: -6px;
+
+  width: min(64%, 470px);
+
+  translate: -50% 0;
+
+  color: var(--color-pink-soft);
+}
+
+.hero-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* clear separation between the three CTA groups, wider than the
+     15px text-to-button gap inside each group */
+  gap: clamp(26px, 3.6vh, 38px);
+
+  margin-top: clamp(36px, 6vh, 60px);
+}
+
+.hero-note {
+  position: relative;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
+
+  gap: 15px;
+}
+
+.hero-line {
+  margin: 0;
+
+  max-width: 560px;
 
   font-family: var(--font-body);
 
-  font-size: clamp(76px, 10vw, 145px);
+  font-size: clamp(14px, 1.5vw, 17px);
 
-  font-weight: 800;
+  line-height: 1.75;
 
-  line-height: 0.86;
-
-  letter-spacing: -0.05em;
+  color: var(--color-ink);
 }
 
-.hero-title-line {
-  display: block;
-}
+.hero-button {
+  display: inline-flex;
+  align-items: center;
 
-.yellow {
-  color: var(--yellow);
-}
+  padding: 13px 24px;
 
-.hero-description {
-  margin-top: 42px;
+  border: 1.6px solid var(--color-ink);
+  border-radius: 100px;
+
+  background: var(--color-beige-panel);
+
+  color: var(--color-ink);
 
   font-family: var(--font-body);
 
   font-size: 13px;
 
-  line-height: 1.8;
+  box-shadow: 3px 4px 0 rgb(var(--blue-rgb) / 0.75);
 
-  color: var(--muted);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.hero-button.is-view {
+  rotate: -1.4deg;
+}
+
+.hero-button.is-mode {
+  rotate: 1.2deg;
+
+  border-color: var(--color-pink);
+
+  color: var(--color-pink);
+
+  box-shadow: 3px 4px 0 rgb(var(--pink-rgb) / 0.6);
+}
+
+/* keeps the left / right / left tilt rhythm across the three CTAs */
+.hero-button.is-player {
+  rotate: -1.2deg;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 4px 6px 0 rgb(var(--blue-rgb) / 0.75);
+}
+
+.hero-button.is-mode:hover {
+  box-shadow: 4px 6px 0 rgb(var(--pink-rgb) / 0.6);
+}
+
+
+/* -------------------------
+   HERO ART — the scrapbook scene
+   Decorative only: hidden from assistive tech and never
+   focusable, so it can never get in the way of the copy.
+------------------------- */
+
+.hero-art {
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+
+  overflow: hidden;
+
+  pointer-events: none;
+}
+
+/* soft painted background: blue + pink pastel areas on paper */
+.hero-wash {
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(
+      58% 46% at 16% 18%,
+      rgb(var(--blue-rgb) / 0.17),
+      transparent 72%
+    ),
+    radial-gradient(
+      52% 42% at 85% 24%,
+      rgb(var(--pink-rgb) / 0.15),
+      transparent 72%
+    ),
+    radial-gradient(
+      76% 54% at 50% 98%,
+      rgb(var(--blue-rgb) / 0.16),
+      transparent 78%
+    ),
+    linear-gradient(180deg, var(--color-beige-soft) 0%, var(--color-beige) 70%);
+}
+
+/* fine paper grain over the wash */
+.hero-paper {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0.085;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)'/%3E%3C/svg%3E");
+
+  background-size: 200px 200px;
+}
+
+/* torn paper strip along the bottom edge */
+.hero-torn-strip {
+  position: absolute;
+
+  left: -2%;
+  right: -2%;
+  bottom: -3vh;
+
+  height: clamp(96px, 17vh, 180px);
+
+  background: var(--color-beige-panel);
+
+  opacity: 0.6;
+
+  clip-path: polygon(
+    0 24%, 4% 14%, 9% 24%, 14% 13%, 20% 23%, 26% 12%, 32% 22%,
+    38% 12%, 45% 21%, 51% 11%, 57% 21%, 63% 12%, 69% 22%,
+    75% 13%, 81% 23%, 87% 13%, 93% 23%, 100% 14%, 100% 100%, 0 100%
+  );
+}
+
+/* soft fluffy clouds across the lower portion */
+.hero-cloud {
+  position: absolute;
+
+  bottom: -3vh;
+}
+
+.cloud-one {
+  left: -7vw;
+
+  width: min(54vw, 560px);
+}
+
+.cloud-two {
+  left: 33vw;
+
+  bottom: -7vh;
+
+  width: min(62vw, 660px);
+
+  opacity: 0.78;
+}
+
+.cloud-three {
+  right: -8vw;
+
+  width: min(48vw, 500px);
+}
+
+.cloud-puff {
+  fill: var(--color-white);
+
+  opacity: 0.94;
+}
+
+.cloud-shade {
+  fill: rgb(var(--blue-rgb) / 0.16);
+}
+
+/* small hand-drawn stars / sparkles */
+.hero-sparkle {
+  position: absolute;
+
+  color: var(--color-blue);
+
+  fill: currentColor;
+}
+
+.hero-sparkle.is-drawn {
+  fill: none;
+
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linejoin: round;
+}
+
+.sparkle-a { left: 9%;  top: 17%; width: 26px; rotate: -6deg; }
+.sparkle-b { left: 18%; top: 45%; width: 16px; color: var(--color-pink); rotate: 8deg; }
+.sparkle-c { left: 7%;  top: 70%; width: 20px; rotate: 14deg; }
+.sparkle-d { left: 27%; top: 11%; width: 15px; color: var(--color-pink); }
+.sparkle-e { right: 11%; top: 20%; width: 24px; rotate: 5deg; }
+.sparkle-f { right: 7%;  top: 46%; width: 17px; color: var(--color-pink); rotate: -9deg; }
+.sparkle-g { right: 20%; top: 74%; width: 21px; rotate: 11deg; }
+.sparkle-h { left: 44%; top: 7%;  width: 14px; color: var(--color-pink); rotate: -4deg; }
+.sparkle-i { left: 36%; top: 83%; width: 18px; rotate: 6deg; }
+
+/* taped scrap with a torn bottom edge */
+.hero-scrap-wrap {
+  position: absolute;
+
+  left: 6vw;
+  top: 13%;
+
+  width: clamp(124px, 13vw, 176px);
+  height: clamp(100px, 11vw, 148px);
+
+  rotate: -3.5deg;
+}
+
+.hero-scrap {
+  position: absolute;
+  inset: 0;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--color-white);
+
+  filter: drop-shadow(0 12px 20px rgb(var(--blue-rgb) / 0.18));
+
+  clip-path: polygon(
+    0 0, 100% 0, 100% 86%, 93% 93%, 86% 87%, 78% 95%, 70% 88%,
+    61% 96%, 53% 89%, 45% 96%, 37% 89%, 29% 96%, 21% 89%,
+    13% 95%, 6% 88%, 0 94%
+  );
+}
+
+.hero-scrap svg {
+  width: 54%;
+
+  color: var(--color-blue);
+
+  opacity: 0.85;
+}
+
+.hero-tape {
+  position: absolute;
+
+  top: -9px;
+
+  width: 54px;
+  height: 20px;
+
+  background: rgb(var(--pink-rgb) / 0.28);
+}
+
+.tape-a {
+  left: -15px;
+
+  rotate: -28deg;
+}
+
+.tape-b {
+  right: -15px;
+
+  rotate: 24deg;
+
+  background: rgb(var(--blue-rgb) / 0.24);
+}
+
+/* sticker */
+.hero-sticker {
+  position: absolute;
+
+  right: 8vw;
+  top: 31%;
+
+  display: grid;
+  place-items: center;
+
+  width: clamp(64px, 7vw, 92px);
+  aspect-ratio: 1;
+
+  rotate: 9deg;
+
+  border: 2px dashed rgb(var(--pink-rgb) / 0.5);
+  border-radius: 50%;
+
+  background: var(--color-white);
+
+  box-shadow: 0 10px 24px rgb(var(--blue-rgb) / 0.16);
+}
+
+.hero-sticker svg {
+  width: 46%;
+
+  color: var(--color-blue);
+
+  fill: currentColor;
+}
+
+/* imperfect hand-drawn shapes */
+.hero-doodle {
+  position: absolute;
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+.doodle-circle {
+  left: 11vw;
+  bottom: 27%;
+
+  width: clamp(72px, 8vw, 112px);
+
+  rotate: -8deg;
+
+  color: var(--color-pink);
+}
+
+.doodle-squiggle {
+  right: 12vw;
+  top: 58%;
+
+  width: clamp(92px, 10vw, 140px);
+
+  rotate: 6deg;
+
+  color: var(--color-blue);
+}
+
+/* handwritten-style arrow pointing at the mode button */
+.hero-arrow {
+  position: absolute;
+
+  left: calc(50% - 205px);
+  bottom: 2px;
+
+  width: 62px;
+
+  rotate: -4deg;
+
+  color: var(--color-pink);
+
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
+
+.yellow {
+  color: var(--yellow);
 }
 
 .explore-button {
@@ -510,310 +915,29 @@ button {
 
 
 /* -------------------------
-   ABSTRACT SCENE
-------------------------- */
-
-.scene {
-  position: absolute;
-
-  right: 8vw;
-  top: 50%;
-
-  width: min(48vw, 680px);
-  height: min(48vw, 680px);
-
-  transform: translateY(-50%);
-
-  z-index: 1;
-}
-
-.scene-glow {
-  position: absolute;
-
-  width: 65%;
-  height: 65%;
-
-  top: 18%;
-  left: 18%;
-
-  border-radius: 50%;
-
-  background:
-    radial-gradient(
-      circle,
-      rgb(var(--blue-rgb) / 0.22),
-      transparent 65%
-    );
-
-  filter: blur(25px);
-}
-
-.floating-orb {
-  position: absolute;
-
-  width: 80px;
-  height: 80px;
-
-  top: 12%;
-  right: 23%;
-
-  border-radius: 50%;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--yellow) 0 48%,
-      var(--orange) 48% 100%
-    );
-
-  box-shadow:
-    0 0 50px rgb(var(--pink-rgb) / 0.16);
-}
-
-.planet-small {
-  position: absolute;
-
-  width: 38px;
-  height: 38px;
-
-  top: 34%;
-  left: 10%;
-
-  border-radius: 50%;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--orange),
-      var(--purple)
-    );
-}
-
-.orbit {
-  position: absolute;
-
-  border: 1px solid rgb(143 161 177 / 0.7);
-
-  border-radius: 50%;
-}
-
-.orbit-one {
-  width: 80%;
-  height: 31%;
-
-  top: 45%;
-  left: 5%;
-
-  transform: rotate(-8deg);
-}
-
-.orbit-two {
-  width: 65%;
-  height: 25%;
-
-  top: 48%;
-  left: 17%;
-
-  transform: rotate(20deg);
-
-  border-color: rgb(var(--pink-rgb) / 0.4);
-}
-
-.portal {
-  position: absolute;
-
-  left: 36%;
-  top: 28%;
-
-  width: 190px;
-  height: 300px;
-}
-
-.portal-back {
-  position: absolute;
-
-  inset: 0;
-
-  background:
-    linear-gradient(
-      135deg,
-      var(--purple),
-      var(--purple-dark)
-    );
-
-  clip-path: polygon(
-    22% 0,
-    100% 6%,
-    100% 78%,
-    50% 100%,
-    0 80%,
-    0 13%
-  );
-
-  opacity: 0.65;
-}
-
-.portal-front {
-  position: absolute;
-
-  left: 30px;
-  top: 45px;
-
-  width: 135px;
-  height: 205px;
-
-  background:
-    linear-gradient(
-      140deg,
-      #f7d7df,
-      var(--orange)
-    );
-
-  clip-path: polygon(
-    10% 0,
-    100% 8%,
-    100% 100%,
-    0 100%,
-    0 8%
-  );
-}
-
-.stairs {
-  position: absolute;
-
-  bottom: -45px;
-  left: -30px;
-
-  width: 200px;
-}
-
-.stairs span {
-  display: block;
-
-  height: 22px;
-
-  margin-top: 4px;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--purple-dark),
-      var(--orange)
-    );
-
-  transform: perspective(100px) rotateX(10deg);
-}
-
-.figure {
-  position: absolute;
-
-  left: 46%;
-  bottom: 19%;
-
-  width: 15px;
-  height: 65px;
-
-  background: #101728;
-
-  border-radius: 50% 50% 15% 15%;
-
-  z-index: 4;
-}
-
-.figure::before {
-  content: "";
-
-  position: absolute;
-
-  width: 18px;
-  height: 18px;
-
-  top: -15px;
-  left: -1px;
-
-  border-radius: 50%;
-
-  background: #101728;
-}
-
-
-/* -------------------------
-   SCRIBBLES
-------------------------- */
-
-.scribble {
-  position: absolute;
-
-  z-index: 5;
-
-  font-family: var(--font-title);
-
-  font-size: 15px;
-
-  line-height: 1.75;
-
-  color: var(--cream);
-
-  transform: rotate(-5deg);
-
-  opacity: 0.85;
-}
-
-.scribble span {
-  display: block;
-
-  color: var(--accent-text);
-
-  font-size: 20px;
-}
-
-.scribble-one {
-  right: 3vw;
-  top: 30%;
-
-  color: var(--accent-text);
-}
-
-.scribble-two {
-  left: 7vw;
-  bottom: 16%;
-
-  color: var(--cream);
-
-  transform: rotate(-8deg);
-}
-
-
-/* -------------------------
    MOBILE
 ------------------------- */
 
 @media (max-width: 900px) {
 
   .hero {
-    padding:
-      8vh
-      8vw
-      150px;
-  }
-
-  .scene {
-    position: absolute;
-
-    width: 90vw;
-    height: 90vw;
-
-    right: -25vw;
-
-    opacity: 0.55;
+    padding: 11vh 7vw 28vh;
   }
 
   .hero-content {
-    max-width: 90%;
+    max-width: 92%;
   }
 
   .hero-title {
-    font-size: clamp(68px, 18vw, 120px);
+    font-size: clamp(50px, 11vw, 112px);
+  }
+
+  .hero-scrap-wrap {
+    left: 4vw;
+  }
+
+  .hero-sticker {
+    right: 5vw;
   }
 }
 
@@ -848,34 +972,23 @@ button {
   .hero {
     min-height: calc(100vh - 70px);
 
-    padding:
-      8vh
-      7vw
-      130px;
+    padding: 8vh 7vw 30vh;
 
     align-items: flex-start;
   }
 
   .hero-title {
-    font-size: 20vw;
+    font-size: clamp(46px, 15vw, 84px);
   }
 
-  .hero-description {
-    font-size: 11px;
+  .hero-line {
+    font-size: 14px;
   }
 
-  .scene {
-    width: 120vw;
-    height: 120vw;
-
-    right: -45vw;
-
-    top: 58%;
-
-    opacity: 0.3;
-  }
-
-  .scribble {
+  .hero-scrap-wrap,
+  .hero-sticker,
+  .hero-doodle,
+  .hero-arrow {
     display: none;
   }
 }

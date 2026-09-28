@@ -13,6 +13,7 @@ export default function TopNav() {
   const logoRef = useRef<HTMLDivElement>(null);
   const logoClicks = useRef(0);
   const mode = useMode();
+  const recruiter = mode === "recruiter";
 
   /* staggered entrance — the original hero timeline, scoped to the nav */
   useEffect(() => {
@@ -46,11 +47,13 @@ export default function TopNav() {
 
   return (
     <header ref={navRef} className="top-nav">
+      {/* the wordmark carries the whack-the-logo easter egg in Player
+          Mode only — Recruiter Mode keeps its chrome quiet */}
       <div
         ref={logoRef}
-        onClick={handleLogo}
+        onClick={recruiter ? undefined : handleLogo}
         className="logo nav-item"
-        title="psst… click me five times"
+        title={recruiter ? undefined : "psst… click me five times"}
       >
         lakshmi<span>.</span>
       </div>

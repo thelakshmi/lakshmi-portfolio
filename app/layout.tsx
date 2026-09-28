@@ -4,8 +4,8 @@ import Script from "next/script";
 
 import "./globals.css";
 import "./sections.css";
-import "./intro.css";
 import "./resume.css";
+import "./recruiter.css";
 
 /* Player Mode · subheadings + body */
 const fredoka = Fredoka({

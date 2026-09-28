@@ -229,9 +229,110 @@ There should be exactly 3 hurdles:
    • Instagram
    • GitHub
    Use my actual handles/links when provided. Do not invent or assume any handles.
-   Custom Cursor & Scrollbar
-   Customize the website's cursor and scrollbar so they match the established light beige + blue + pink colour palette.
-   • The cursor should have a custom, subtle design that fits the playful Player Mode aesthetic.
-   • The scrollbar should be visually customized instead of using the browser's default scrollbar.
-   • Both should remain functional and should not interfere with normal navigation or gameplay.
-   Important: Keep the Contact section focused on these specified interactions. Do not add additional contact forms, social platforms, animations, games, or features that have not been specified.
+
+RECRUITER MODE
+Recruiter Mode should have the same four main sections:
+
+1. About
+2. Projects
+3. Skills
+4. Contact
+   This mode should be designed specifically for recruiters and professional visitors.
+   Overall Design Direction
+   Recruiter Mode should be:
+   • Professional
+   • Neat
+   • Clean
+   • Structured
+   • Easy to scan
+   • Visually impressive without being distracting
+   Unlike Player Mode, Recruiter Mode should not contain illustrations, funny elements, playful game mechanics, or whimsical decorations.
+   It should use the same light beige + blue + pink colour palette established for the entire website, but use the Recruiter Mode typography:
+   • Headings: Space Grotesk — Semibold/Bold
+   • Body: DM Sans — Regular/Medium
+   The design should feel distinctly different from Player Mode while still clearly belonging to the same portfolio.
+
+---
+
+ABOUT
+Display a circular photograph of me on one side, with my introduction/information beside it.
+Use this text exactly as provided:
+My name is Lakshmi S, a 3rd-year Computer Science Engineering student from India. I enjoy building practical web applications and experimenting with AI/ML. I am driven by curiosity and a commitment to building impactful software solutions. I usually spend my free time on side projects that earn me new skills. I am always working to better myself as an engineer and person.
+Keep this section clean and easy to scan without adding unnecessary visual elements.
+
+---
+
+PROJECTS
+Display the projects in a professional, formal and neatly structured layout.
+The project information below must be used exactly as provided. Do not rewrite, paraphrase, shorten, expand, or add claims.
+The layout should provide enough visual hierarchy to distinguish:
+• Project name
+• Description
+• Technology stack
+Keep the section clean and uncluttered. It should be easy for a recruiter to quickly understand what each project is and what my role was.
+NextStep
+A full-stack web application I built with my team to make the Letter of Recommendation process easier for students and faculty. It replaces the usual manual process with a platform where students can submit requests and faculty can review and approve them.
+This was one of my first projects where I got to work with backend APIs, databases, and the frontend together, and understand how all the pieces of a web application fit.
+Tech: Node.js · MySQL · MongoDB
+WIN-DIA
+I got the opportunity to work with the college incubation centre and a student team to build an e-commerce website for WIN-DIA, a food startup.
+I worked mainly on the frontend, turning the brand's ideas and requirements into the actual website. Since this was for a real startup, I also got to work directly with the client and understand how design and development change when you're building something for an actual business.
+Tech: Next.js · CSS · Supabase · Resend · Git · GitHub · Vercel
+NutriAgama
+Another startup project I’m working on through the college incubation centre, this time for NutriAgama, a wellness brand focused on traditional Indian nutrition products.
+I'm handling the backend and payment gateway, while working with the team to build the rest of the platform. These projects have been a good way to experience what development looks like beyond college assignments—from understanding client requirements to figuring out how to actually implement them.
+Tech: Next.js · CSS · Supabase · Resend · Git · GitHub · Vercel
+AI Engineering Roadmap
+An ongoing individual project where I'm exploring AI engineering by building 8 projects, starting with basic LLM applications and gradually moving into more advanced systems.
+So far, the roadmap covers things like RAG, hybrid retrieval, reranking, evaluation, monitoring, multi-agent systems, and LLM fine-tuning with LoRA/QLoRA. I'm also exploring AI coding assistants and multimodal applications.
+The idea is simple: instead of just learning AI concepts separately, I want to actually build with them and understand what goes on behind the scenes.
+Status: In progress · Individual project
+
+---
+
+SKILLS
+Display my technical and professional skills in a clean visual skill-level system.
+Each skill should have a horizontal bar indicating my self-assessed proficiency.
+The score is out of 10, and the length of the bar should correspond directly to the score.
+Use these exact scores:
+Skill Score
+Java 6/10
+Python 6/10
+C/C++ 4/10
+HTML 7/10
+CSS 6/10
+Javascript 5/10
+Node.js 5/10
+Microsoft Suite (Excel, PowerPoint, etc.) 7/10
+Formal/Technical Presentations 6.5/10
+IoT 5/10
+Categorize the skills according to the category structure shown in the provided reference, and display the proficiency bars according to the scores above.
+Do not change the scores or infer higher proficiency levels.
+Skills category reference:
+docs/recruiter-skills-reference.png
+
+---
+
+CONTACT
+The Recruiter Mode Contact section should be professional and straightforward, while still allowing interaction.
+Feedback
+Include a feedback section where visitors can give me:
+• Advice on how I can improve my existing projects
+• Advice on how I can improve the website
+Collaboration
+Include an option for visitors who are interested in collaborating with me to build something new.
+The section should communicate that I am open to collaboration and interested in building new things with others.
+Contact Information
+Include:
+• My email
+• My GitHub
+Use my actual email address and GitHub link when provided. Do not invent or assume either one.
+Keep this section professional and uncluttered, consistent with the rest of Recruiter Mode.
+Important: Recruiter Mode should remain focused on presenting my information, projects, skills, and contact options clearly. Do not carry over Player Mode's game mechanics, illustrations, humorous interactions, or decorative elements into this mode.
+
+Custom Cursor & Scrollbar
+Customize the website's cursor and scrollbar so they match the established light beige + blue + pink colour palette.
+• The cursor should have a custom, subtle design that fits the playful Player Mode aesthetic.
+• The scrollbar should be visually customized instead of using the browser's default scrollbar.
+• Both should remain functional and should not interfere with normal navigation or gameplay.
+Important: Keep the Contact section focused on these specified interactions. Do not add additional contact forms, social platforms, animations, games, or features that have not been specified.
