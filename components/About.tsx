@@ -29,6 +29,8 @@ export default function About() {
         <span className="section-rule" />
       </div>
 
+      <h2 className="section-title reveal">About</h2>
+
       {/* two-part layout: photograph | short introduction */}
       <div className="about-grid">
         <div className="about-photo reveal">

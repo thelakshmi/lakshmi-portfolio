@@ -499,6 +499,8 @@ export default function Skills() {
         <span className="section-rule" />
       </div>
 
+      <h2 className="section-title reveal">Skills Game</h2>
+
       <div className="game-shell reveal" data-delay="0.12" data-phase={phase}>
         <div className={`game-stage ${phase}`} ref={stageRef}>
           {/* environment layers — visual only */}

@@ -3,17 +3,11 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 
-import { burstFrom } from "@/lib/confetti";
-import { useMode } from "@/lib/mode";
 import ModeSwitch from "@/components/ModeSwitch";
 import PlayerMenu from "@/components/PlayerMenu";
 
 export default function TopNav() {
   const navRef = useRef<HTMLElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const logoClicks = useRef(0);
-  const mode = useMode();
-  const recruiter = mode === "recruiter";
 
   /* staggered entrance — the original hero timeline, scoped to the nav */
   useEffect(() => {
@@ -31,38 +25,14 @@ export default function TopNav() {
     return () => ctx.revert();
   }, []);
 
-  /* easter egg: whack the logo five times */
-  const handleLogo = () => {
-    logoClicks.current += 1;
-
-    if (logoClicks.current >= 5) {
-      logoClicks.current = 0;
-      burstFrom(logoRef.current, 60);
-    }
-
-    window.setTimeout(() => {
-      if (logoClicks.current > 0) logoClicks.current -= 1;
-    }, 1400);
-  };
-
   return (
     <header ref={navRef} className="top-nav">
-      {/* the wordmark carries the whack-the-logo easter egg in Player
-          Mode only — Recruiter Mode keeps its chrome quiet */}
-      <div
-        ref={logoRef}
-        onClick={recruiter ? undefined : handleLogo}
-        className="logo nav-item"
-        title={recruiter ? undefined : "psst… click me five times"}
-      >
-        lakshmi<span>.</span>
-      </div>
-
-      {/* fixed top-right cluster: the mode switch, plus the Player
-          Mode hamburger menu only while Player Mode is active */}
+      {/* fixed top-right cluster: the mode switch, plus the single
+          circular hamburger — the same button in both modes; its
+          links follow the current mode */}
       <div className="nav-actions nav-item">
         <ModeSwitch />
-        {mode === "player" && <PlayerMenu />}
+        <PlayerMenu />
       </div>
     </header>
   );

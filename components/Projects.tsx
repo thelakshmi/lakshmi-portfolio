@@ -132,6 +132,8 @@ export default function Projects() {
         <span className="section-rule" />
       </div>
 
+      <h2 className="section-title reveal">Projects</h2>
+
       {/* a physical collection of cards — each at its own angle,
           proportion and offset, turning over on hover/focus */}
       <div className="project-grid">

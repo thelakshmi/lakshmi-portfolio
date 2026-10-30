@@ -2,23 +2,36 @@
 
 import { useEffect, useRef, useState } from "react";
 
-/* the four sections the Player Mode menu must reach */
-const MENU_LINKS = [
+import { subscribeMode, useMode } from "@/lib/mode";
+
+/* the four section links each mode's menu must reach */
+const MENU_PLAYER = [
   { id: "about", label: "About" },
   { id: "projects", label: "Projects" },
   { id: "skills", label: "Skills Game" },
   { id: "contact", label: "Contact" },
 ];
 
+const MENU_RECRUITER = [
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "skills", label: "Skills" },
+  { id: "contact", label: "Contact" },
+];
+
 /**
- * Player Mode's single circular hamburger button in the top-right
- * corner. It opens the four section links and closes again on
- * link click, outside click or Escape. No other navigation lives
- * here — it is never a navigation bar.
+ * The single circular hamburger button in the top-right corner —
+ * the same button in Player Mode and Recruiter Mode. Its four
+ * links always follow the current mode (Player: Skills Game,
+ * Recruiter: Skills). It closes again on link click, outside
+ * click or Escape. No other navigation lives here.
  */
 export default function PlayerMenu() {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
+
+  const recruiter = useMode() === "recruiter";
+  const links = recruiter ? MENU_RECRUITER : MENU_PLAYER;
 
   useEffect(() => {
     if (!open) return;
@@ -40,6 +53,9 @@ export default function PlayerMenu() {
     };
   }, [open]);
 
+  /* a mode toggle always starts from a closed menu */
+  useEffect(() => subscribeMode(() => setOpen(false)), []);
+
   return (
     <div className="player-menu" ref={rootRef}>
       <button
@@ -58,7 +74,7 @@ export default function PlayerMenu() {
 
       {open && (
         <nav className="menu-panel" aria-label="Sections">
-          {MENU_LINKS.map((item) => (
+          {links.map((item) => (
             <a
               key={item.id}
               href={`#${item.id}`}

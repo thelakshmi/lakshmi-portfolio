@@ -12,11 +12,43 @@
    mechanics, illustrations or whimsical decoration carry over.
 ------------------------------------------------------------------- */
 
-/* the shell's wordmark reads as its heading: Space Grotesk Bold */
-html[data-mode="recruiter"] .logo {
+/* ------------------------------------------------------------------
+   SECTION TITLES
+   One visible section title per recruiter section (About, Projects,
+   Skills, Contact) — the recruiter heading typography, Space
+   Grotesk Semibold. Plain section names only: no subtitles,
+   taglines or decorative text.
+------------------------------------------------------------------- */
+
+.rc-section-title {
+  margin: 0 0 clamp(28px, 4vw, 48px);
+
   font-family: var(--font-heading);
 
+  font-size: clamp(26px, 3.2vw, 38px);
   font-weight: 700;
+  line-height: 1.2;
+
+  color: var(--color-ink);
+}
+
+/* the About section is a grid: the title spans both columns and the
+   row gap does the spacing — it stays left-aligned even where the
+   responsive layout centres the other items */
+.rc-about .rc-section-title {
+  grid-column: 1 / -1;
+  justify-self: stretch;
+
+  margin-bottom: 0;
+}
+
+/* every recruiter section lands below the fixed top-right cluster
+   when reached through the hamburger menu */
+.rc-about,
+.rc-projects,
+.rc-skills,
+.rc-contact {
+  scroll-margin-top: 24px;
 }
 
 /* ------------------------------------------------------------------
@@ -72,6 +104,453 @@ html[data-mode="recruiter"] .logo {
   line-height: 1.8;
 
   color: var(--color-ink);
+}
+
+
+/* ------------------------------------------------------------------
+   PROJECTS  (id="projects")
+   A structured two-column grid of the four projects with a clear
+   hierarchy: project name (Space Grotesk Semibold), description
+   (DM Sans Regular), tech stack / status (DM Sans Medium, blue
+   accent). Hairline rules only - no Player Mode cards, flips,
+   rotations, stickers or other whimsical decoration.
+------------------------------------------------------------------- */
+
+.rc-projects {
+  max-width: 1060px;
+  margin: 0 auto;
+
+  padding: 0 clamp(24px, 8vw, 96px) clamp(88px, 14vh, 160px);
+}
+
+.rc-project-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  column-gap: clamp(32px, 5vw, 72px);
+  row-gap: clamp(36px, 5vh, 56px);
+}
+
+.rc-project {
+  border-top: 1px solid var(--line);
+
+  padding-top: clamp(18px, 2.4vw, 26px);
+}
+
+.rc-project-name {
+  margin: 0 0 clamp(12px, 1.6vh, 16px);
+
+  font-family: var(--font-heading);
+
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 600;
+  line-height: 1.3;
+
+  color: var(--color-ink);
+}
+
+.rc-project-desc {
+  margin: 0 0 clamp(10px, 1.4vh, 14px);
+
+  font-family: var(--font-body);
+
+  font-size: clamp(15px, 1.5vw, 16.5px);
+  font-weight: 400;
+  line-height: 1.75;
+
+  color: var(--color-ink);
+}
+
+.rc-project-meta {
+  margin: clamp(14px, 1.8vh, 20px) 0 0;
+
+  font-family: var(--font-body);
+
+  font-size: clamp(13.5px, 1.3vw, 15px);
+  font-weight: 500;
+  line-height: 1.6;
+
+  color: var(--color-blue);
+}
+
+/* one readable column on tablet and below - descriptions stay
+   fully visible at every width */
+@media (max-width: 900px) {
+  .rc-project-list {
+    grid-template-columns: 1fr;
+
+    row-gap: clamp(30px, 5vh, 44px);
+  }
+}
+
+
+/* ------------------------------------------------------------------
+   SKILLS  (id="skills")
+   The proficiency pattern from the reference image: a category
+   heading, the Introduced / Proficient / Expert scale with its
+   hairline, and one thin bar per skill - the filled portion is
+   score / 10 of the full track (the track is 10/10). Static
+   visualisation: no game mechanics, quizzes, sliders, filtering,
+   hover states or animated scores.
+------------------------------------------------------------------- */
+
+.rc-skills {
+  max-width: 1060px;
+  margin: 0 auto;
+
+  padding: 0 clamp(24px, 8vw, 96px) clamp(88px, 14vh, 160px);
+}
+
+.rc-skill-category-name {
+  margin: 0;
+
+  font-family: var(--font-heading);
+
+  font-size: clamp(15px, 1.8vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+
+  color: var(--color-ink);
+}
+
+/* header row: category name (left column) | scale labels (over
+   the bar column), closed by the reference's hairline */
+.rc-skill-scale {
+  display: grid;
+  grid-template-columns: minmax(170px, 30%) minmax(0, 1fr);
+
+  column-gap: clamp(24px, 4vw, 56px);
+  align-items: end;
+}
+
+.rc-skill-scale-labels {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+.rc-skill-scale-labels span {
+  font-family: var(--font-body);
+
+  font-size: clamp(11.5px, 1.2vw, 13px);
+  font-weight: 500;
+
+  color: var(--color-slate);
+}
+
+.rc-skill-scale-labels span:nth-child(2) {
+  justify-self: center;
+}
+
+.rc-skill-scale-labels span:nth-child(3) {
+  justify-self: end;
+}
+
+.rc-skill-list {
+  margin: 0;
+  padding: clamp(18px, 2.6vh, 28px) 0 0;
+
+  list-style: none;
+
+  display: grid;
+  row-gap: clamp(16px, 2.4vh, 24px);
+}
+
+/* skill row: name (left column) | proficiency bar (scale column) */
+.rc-skill-row {
+  display: grid;
+  grid-template-columns: minmax(170px, 30%) minmax(0, 1fr);
+
+  column-gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+.rc-skill-name {
+  font-family: var(--font-body);
+
+  font-size: clamp(14.5px, 1.5vw, 16px);
+  font-weight: 400;
+  line-height: 1.45;
+
+  color: var(--color-ink);
+}
+
+/* full unfilled track = 10/10 */
+.rc-skill-track {
+  position: relative;
+
+  height: 2px;
+
+  background: var(--line);
+}
+
+/* filled portion = score / 10 of the track (width set inline) */
+.rc-skill-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  height: 100%;
+
+  background: var(--color-blue);
+}
+
+/* stack name above its bar on small screens - readability over
+   the desktop two-column arrangement, nothing hidden */
+@media (max-width: 760px) {
+  .rc-skill-scale,
+  .rc-skill-row {
+    grid-template-columns: 1fr;
+
+    row-gap: 8px;
+  }
+
+  .rc-skill-scale {
+    align-items: start;
+  }
+}
+
+
+/* ------------------------------------------------------------------
+   CONTACT  (id="contact")
+   Three plain areas - Feedback, Collaboration, Contact Information -
+   as recruiter rows (heading left, content right), each closed by
+   the section hairline. The Feedback area carries a small chatbox
+   (one message field, one Send button) posting to the same
+   anonymous backend as Player Contact. Ordinary interactions only:
+   subtle hovers and focus outlines; no Player Mode mechanics,
+   moving buttons or decorative elements.
+------------------------------------------------------------------- */
+
+.rc-contact {
+  max-width: 1060px;
+  margin: 0 auto;
+
+  padding: 0 clamp(24px, 8vw, 96px) clamp(88px, 14vh, 160px);
+}
+
+.rc-contact-grid {
+  display: flex;
+  flex-direction: column;
+  row-gap: clamp(30px, 5vh, 44px);
+}
+
+.rc-contact-area {
+  display: grid;
+  grid-template-columns: minmax(170px, 30%) minmax(0, 1fr);
+
+  column-gap: clamp(24px, 4vw, 56px);
+
+  padding-top: clamp(18px, 2.6vh, 28px);
+  border-top: 1px solid var(--line);
+}
+
+.rc-contact-heading {
+  margin: 0;
+
+  font-family: var(--font-heading);
+
+  font-size: clamp(15px, 1.8vw, 18px);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+
+  color: var(--color-ink);
+}
+
+/* feedback: the two advice prompts, exactly as specified */
+.rc-feedback-list {
+  margin: 0;
+  padding: 0 0 0 1.15em;
+
+  list-style: disc;
+
+  font-family: var(--font-body);
+
+  font-size: clamp(14.5px, 1.5vw, 16px);
+  font-weight: 400;
+  line-height: 1.55;
+
+  color: var(--color-ink);
+}
+
+.rc-feedback-list li + li {
+  margin-top: 10px;
+}
+
+/* small feedback chatbox: the two prompts stay visible above one
+   message field, one Send button and one status line */
+.rc-feedback {
+  display: flex;
+  flex-direction: column;
+
+  row-gap: clamp(16px, 2.4vh, 22px);
+}
+
+.rc-feedback-form {
+  display: flex;
+  flex-direction: column;
+
+  row-gap: 10px;
+
+  max-width: 560px;
+}
+
+.rc-feedback-input {
+  width: 100%;
+
+  padding: 12px 14px;
+
+  border: 1px solid var(--line);
+  border-radius: 10px;
+
+  background: var(--color-beige-panel);
+
+  font-family: var(--font-body);
+
+  font-size: clamp(14.5px, 1.5vw, 16px);
+  font-weight: 400;
+  line-height: 1.55;
+
+  color: var(--color-ink);
+
+  resize: vertical;
+}
+
+.rc-feedback-input:focus {
+  border-color: var(--color-blue);
+}
+
+.rc-feedback-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  gap: clamp(12px, 2vw, 18px);
+}
+
+.rc-feedback-send {
+  padding: 9px 24px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: var(--color-blue);
+  color: var(--color-white);
+
+  font-family: var(--font-body);
+
+  font-size: 14.5px;
+  font-weight: 500;
+
+  transition: background 0.2s ease;
+}
+
+.rc-feedback-send:hover:not(:disabled) {
+  background: var(--color-blue-deep);
+}
+
+.rc-feedback-send:disabled {
+  opacity: 0.45;
+}
+
+.rc-feedback-send:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+.rc-feedback-status {
+  margin: 0;
+
+  font-family: var(--font-body);
+
+  font-size: 13.5px;
+  font-weight: 400;
+
+  color: var(--color-slate);
+}
+
+.rc-feedback-status--sent {
+  color: var(--color-blue);
+}
+
+.rc-feedback-status--failed {
+  color: var(--color-pink);
+}
+
+.rc-contact-copy {
+  font-family: var(--font-body);
+
+  font-size: clamp(14.5px, 1.5vw, 16px);
+  font-weight: 400;
+  line-height: 1.6;
+
+  color: var(--color-ink);
+}
+
+.rc-contact-copy p {
+  margin: 0;
+}
+
+.rc-contact-copy p + p {
+  margin-top: 10px;
+}
+
+.rc-contact-details {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.rc-contact-row {
+  display: flex;
+  flex-wrap: wrap;
+
+  column-gap: clamp(14px, 2vw, 24px);
+  row-gap: 4px;
+  align-items: baseline;
+}
+
+.rc-contact-label {
+  font-family: var(--font-body);
+
+  font-size: clamp(13px, 1.3vw, 14px);
+  font-weight: 500;
+  min-width: 4.5em;
+
+  color: var(--color-slate);
+}
+
+.rc-contact-link {
+  font-family: var(--font-body);
+
+  font-size: clamp(14.5px, 1.5vw, 16px);
+  font-weight: 500;
+
+  color: var(--color-blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.rc-contact-link:hover {
+  color: var(--color-ink);
+}
+
+.rc-contact-link:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
+}
+
+/* stack heading above its content on small screens - nothing hidden,
+   hierarchy and spacing kept readable at every width */
+@media (max-width: 760px) {
+  .rc-contact-area {
+    grid-template-columns: 1fr;
+
+    row-gap: 10px;
+  }
 }
 
 

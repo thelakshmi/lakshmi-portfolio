@@ -224,13 +224,7 @@ export default function Contact() {
         <span className="section-rule" />
       </div>
 
-      <h2 className="section-title contact-title reveal">
-        {contact.title.map((line, index) => (
-          <span key={line} className="title-line" data-delay={index * 0.08}>
-            {line}
-          </span>
-        ))}
-      </h2>
+      <h2 className="section-title contact-title reveal">Contact</h2>
 
       <p className="section-blurb reveal">{contact.blurb}</p>
 

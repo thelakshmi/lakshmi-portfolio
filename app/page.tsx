@@ -6,13 +6,14 @@ import TopNav from "@/components/TopNav";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
-import AiLab from "@/components/AiLab";
 import Skills from "@/components/Skills";
-import Journey from "@/components/Journey";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import RecruiterAbout from "@/components/RecruiterAbout";
-import { CursorGlow, ScrollProgress } from "@/components/Chrome";
+import RecruiterProjects from "@/components/RecruiterProjects";
+import RecruiterSkills from "@/components/RecruiterSkills";
+import RecruiterContact from "@/components/RecruiterContact";
+import { ScrollProgress } from "@/components/Chrome";
 
 import { burst } from "@/lib/confetti";
 import { getMode, subscribeMode, useMode } from "@/lib/mode";
@@ -55,21 +56,21 @@ export default function Home() {
   return (
     <>
       <main className="portfolio">
-        <CursorGlow />
         <TopNav />
 
         {recruiter ? (
           <div className="mode-recruiter">
             <RecruiterAbout />
+            <RecruiterProjects />
+            <RecruiterSkills />
+            <RecruiterContact />
           </div>
         ) : (
           <div className="mode-player">
             <Hero />
             <About />
             <Projects />
-            <AiLab />
             <Skills />
-            <Journey />
             <Contact />
             <Footer />
           </div>

@@ -18,6 +18,8 @@ const INTRODUCTION =
 export default function RecruiterAbout() {
   return (
     <section id="about" className="rc-about" aria-label="About">
+      <h2 className="rc-section-title">About</h2>
+
       {/* two-part layout: circular photograph | introduction */}
       <div className="rc-about-photo">
         <Image

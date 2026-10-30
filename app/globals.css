@@ -126,11 +126,6 @@ html:not([data-mode="recruiter"]) .mode-recruiter {
   display: none;
 }
 
-/* the Player hamburger never paints in Recruiter Mode */
-html[data-mode="recruiter"] .player-menu {
-  display: none;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -211,6 +206,9 @@ button {
   z-index: 20;
 }
 
+/* wordmark styling — the header no longer renders a wordmark
+   (removed in the correction pass); this now styles the Footer's
+   own "lakshmi." mark, which stays untouched. */
 .logo {
   font-family: var(--font-body);
 
@@ -230,7 +228,8 @@ button {
    PERSISTENT CONTROLS
    The top-right cluster is fixed so the mode switch stays
    reachable while browsing. It holds the Recruiter/Player toggle
-   and, in Player Mode only, the circular hamburger button.
+   and the circular hamburger button — the same hamburger in
+   both modes.
 ------------------------- */
 
 .nav-actions {
@@ -326,10 +325,11 @@ button {
 
 
 /* -------------------------
-   PLAYER MODE MENU
-   One circular hamburger button in the top-right corner. It opens
-   the four section links and nothing else — it never becomes a
-   navigation bar, and it does not appear in Recruiter Mode.
+   SECTION MENU (both modes)
+   One circular hamburger button in the top-right corner — the
+   same button in Player Mode and Recruiter Mode. It opens the
+   four section links of the current mode and nothing else — it
+   never becomes a navigation bar.
 ------------------------- */
 
 .player-menu {
@@ -340,36 +340,45 @@ button {
   display: grid;
   place-items: center;
 
-  width: 44px;
-  height: 44px;
+  width: 56px;
+  height: 56px;
 
-  border: 1px solid var(--line);
+  border: 1.5px solid var(--stroke);
   border-radius: 50%;
 
   background: var(--color-beige-panel);
 
-  transition: border-color 0.25s ease;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    transform 0.2s ease;
 }
 
 .menu-button:hover {
   border-color: var(--accent-text);
+
+  background: var(--color-beige-soft);
+}
+
+.menu-button:active {
+  transform: scale(0.94);
 }
 
 .menu-icon {
   display: flex;
   flex-direction: column;
 
-  gap: 4px;
+  gap: 6px;
 
-  width: 17px;
+  width: 24px;
 }
 
 .menu-icon span {
   display: block;
 
-  height: 1.5px;
+  height: 2.5px;
 
-  border-radius: 2px;
+  border-radius: 999px;
 
   background: var(--color-ink);
 }
@@ -420,20 +429,26 @@ button {
 
 /* -------------------------
    HERO — OPENING SECTION
-   A full-screen illustrated scrapbook: painted washes, paper
-   texture, torn + taped pieces, clouds across the lower portion
-   and hand-drawn sparkles, behind a Brittany Signature title.
+   A full-screen illustrated scene: the reference artwork fills
+   the whole background behind a Brittany Signature title, so the
+   section reads as one painted poster rather than a website.
    Palette stays light beige + blue + pink.
 ------------------------- */
 
 .hero {
   position: relative;
 
-  min-height: calc(100vh - 90px);
+  /* the scene runs from the very top of the page: the 90px nav band
+     sits on top of the artwork instead of above it, so no blank bar
+     is left across the top. The extra padding-top keeps the copy in
+     exactly the place it had when the section started below the nav. */
+  margin-top: -90px;
+
+  min-height: 100vh;
 
   overflow: hidden;
 
-  padding: 10vh 8vw 30vh;
+  padding: calc(10vh + 90px) 8vw 6vh;
 
   display: flex;
   align-items: center;
@@ -446,12 +461,26 @@ button {
   z-index: 5;
 
   width: 100%;
-  max-width: 980px;
+  max-width: 1280px;
+
+  /* the copy fills the whole frame: title at the top of the section,
+     the three invitations along the bottom, nothing scrolled away */
+  align-self: stretch;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  /* floor for the space between title and invitations — the rest of
+     the height is distributed by space-between */
+  gap: clamp(28px, 5vh, 64px);
 
   text-align: center;
 }
 
-/* the title, painted straight onto the scene */
+/* the title, painted straight onto the scene.
+   Sized against the viewport height as well as its width, so the
+   whole opening still fits on one screen on short laptop windows. */
 .hero-title {
   position: relative;
 
@@ -461,7 +490,7 @@ button {
 
   font-family: var(--font-hero);
 
-  font-size: clamp(54px, 8.6vw, 132px);
+  font-size: clamp(42px, min(7.4vw, 9.6vh), 96px);
 
   font-weight: 400;
 
@@ -492,24 +521,33 @@ button {
   color: var(--color-pink-soft);
 }
 
+/* the three invitations sit side by side along the bottom of the
+   frame, so the whole opening reads on one screen and the width of
+   the section is actually used */
 .hero-lines {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
 
   /* clear separation between the three CTA groups, wider than the
      15px text-to-button gap inside each group */
-  gap: clamp(26px, 3.6vh, 38px);
-
-  margin-top: clamp(36px, 6vh, 60px);
+  gap: clamp(24px, 3.4vw, 60px);
 }
 
 .hero-note {
   position: relative;
 
+  flex: 1 1 0;
+  max-width: 380px;
+
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  /* text stays on top, buttons line up on one shared baseline
+     however long the sentence above them is */
+  justify-content: space-between;
 
   gap: 15px;
 }
@@ -585,8 +623,9 @@ button {
 
 
 /* -------------------------
-   HERO ART — the scrapbook scene
-   Decorative only: hidden from assistive tech and never
+   HERO ART — the painted background
+   A single decorative layer: the reference artwork fills the
+   section edge to edge. Hidden from assistive tech and never
    focusable, so it can never get in the way of the copy.
 ------------------------- */
 
@@ -599,264 +638,20 @@ button {
   overflow: hidden;
 
   pointer-events: none;
-}
-
-/* soft painted background: blue + pink pastel areas on paper */
-.hero-wash {
-  position: absolute;
-  inset: 0;
 
   background:
-    radial-gradient(
-      58% 46% at 16% 18%,
-      rgb(var(--blue-rgb) / 0.17),
-      transparent 72%
-    ),
-    radial-gradient(
-      52% 42% at 85% 24%,
-      rgb(var(--pink-rgb) / 0.15),
-      transparent 72%
-    ),
-    radial-gradient(
-      76% 54% at 50% 98%,
-      rgb(var(--blue-rgb) / 0.16),
-      transparent 78%
-    ),
-    linear-gradient(180deg, var(--color-beige-soft) 0%, var(--color-beige) 70%);
+    url("/images/hero-bg.jpg") center / cover no-repeat,
+    var(--color-beige-soft);
 }
 
-/* fine paper grain over the wash */
-.hero-paper {
-  position: absolute;
-  inset: 0;
 
-  opacity: 0.085;
-
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paper'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paper)'/%3E%3C/svg%3E");
-
-  background-size: 200px 200px;
-}
-
-/* torn paper strip along the bottom edge */
-.hero-torn-strip {
-  position: absolute;
-
-  left: -2%;
-  right: -2%;
-  bottom: -3vh;
-
-  height: clamp(96px, 17vh, 180px);
-
-  background: var(--color-beige-panel);
-
-  opacity: 0.6;
-
-  clip-path: polygon(
-    0 24%, 4% 14%, 9% 24%, 14% 13%, 20% 23%, 26% 12%, 32% 22%,
-    38% 12%, 45% 21%, 51% 11%, 57% 21%, 63% 12%, 69% 22%,
-    75% 13%, 81% 23%, 87% 13%, 93% 23%, 100% 14%, 100% 100%, 0 100%
-  );
-}
-
-/* soft fluffy clouds across the lower portion */
-.hero-cloud {
-  position: absolute;
-
-  bottom: -3vh;
-}
-
-.cloud-one {
-  left: -7vw;
-
-  width: min(54vw, 560px);
-}
-
-.cloud-two {
-  left: 33vw;
-
-  bottom: -7vh;
-
-  width: min(62vw, 660px);
-
-  opacity: 0.78;
-}
-
-.cloud-three {
-  right: -8vw;
-
-  width: min(48vw, 500px);
-}
-
-.cloud-puff {
-  fill: var(--color-white);
-
-  opacity: 0.94;
-}
-
-.cloud-shade {
-  fill: rgb(var(--blue-rgb) / 0.16);
-}
-
-/* small hand-drawn stars / sparkles */
-.hero-sparkle {
-  position: absolute;
-
-  color: var(--color-blue);
-
-  fill: currentColor;
-}
-
-.hero-sparkle.is-drawn {
-  fill: none;
-
-  stroke: currentColor;
-  stroke-width: 1.7;
-  stroke-linejoin: round;
-}
-
-.sparkle-a { left: 9%;  top: 17%; width: 26px; rotate: -6deg; }
-.sparkle-b { left: 18%; top: 45%; width: 16px; color: var(--color-pink); rotate: 8deg; }
-.sparkle-c { left: 7%;  top: 70%; width: 20px; rotate: 14deg; }
-.sparkle-d { left: 27%; top: 11%; width: 15px; color: var(--color-pink); }
-.sparkle-e { right: 11%; top: 20%; width: 24px; rotate: 5deg; }
-.sparkle-f { right: 7%;  top: 46%; width: 17px; color: var(--color-pink); rotate: -9deg; }
-.sparkle-g { right: 20%; top: 74%; width: 21px; rotate: 11deg; }
-.sparkle-h { left: 44%; top: 7%;  width: 14px; color: var(--color-pink); rotate: -4deg; }
-.sparkle-i { left: 36%; top: 83%; width: 18px; rotate: 6deg; }
-
-/* taped scrap with a torn bottom edge */
-.hero-scrap-wrap {
-  position: absolute;
-
-  left: 6vw;
-  top: 13%;
-
-  width: clamp(124px, 13vw, 176px);
-  height: clamp(100px, 11vw, 148px);
-
-  rotate: -3.5deg;
-}
-
-.hero-scrap {
-  position: absolute;
-  inset: 0;
-
-  display: grid;
-  place-items: center;
-
-  background: var(--color-white);
-
-  filter: drop-shadow(0 12px 20px rgb(var(--blue-rgb) / 0.18));
-
-  clip-path: polygon(
-    0 0, 100% 0, 100% 86%, 93% 93%, 86% 87%, 78% 95%, 70% 88%,
-    61% 96%, 53% 89%, 45% 96%, 37% 89%, 29% 96%, 21% 89%,
-    13% 95%, 6% 88%, 0 94%
-  );
-}
-
-.hero-scrap svg {
-  width: 54%;
-
-  color: var(--color-blue);
-
-  opacity: 0.85;
-}
-
-.hero-tape {
-  position: absolute;
-
-  top: -9px;
-
-  width: 54px;
-  height: 20px;
-
-  background: rgb(var(--pink-rgb) / 0.28);
-}
-
-.tape-a {
-  left: -15px;
-
-  rotate: -28deg;
-}
-
-.tape-b {
-  right: -15px;
-
-  rotate: 24deg;
-
-  background: rgb(var(--blue-rgb) / 0.24);
-}
-
-/* sticker */
-.hero-sticker {
-  position: absolute;
-
-  right: 8vw;
-  top: 31%;
-
-  display: grid;
-  place-items: center;
-
-  width: clamp(64px, 7vw, 92px);
-  aspect-ratio: 1;
-
-  rotate: 9deg;
-
-  border: 2px dashed rgb(var(--pink-rgb) / 0.5);
-  border-radius: 50%;
-
-  background: var(--color-white);
-
-  box-shadow: 0 10px 24px rgb(var(--blue-rgb) / 0.16);
-}
-
-.hero-sticker svg {
-  width: 46%;
-
-  color: var(--color-blue);
-
-  fill: currentColor;
-}
-
-/* imperfect hand-drawn shapes */
-.hero-doodle {
-  position: absolute;
-
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.2;
-  stroke-linecap: round;
-}
-
-.doodle-circle {
-  left: 11vw;
-  bottom: 27%;
-
-  width: clamp(72px, 8vw, 112px);
-
-  rotate: -8deg;
-
-  color: var(--color-pink);
-}
-
-.doodle-squiggle {
-  right: 12vw;
-  top: 58%;
-
-  width: clamp(92px, 10vw, 140px);
-
-  rotate: 6deg;
-
-  color: var(--color-blue);
-}
-
-/* handwritten-style arrow pointing at the mode button */
+/* handwritten-style arrow pointing at the mode button:
+   it sits just left of the centred button inside its own group */
 .hero-arrow {
   position: absolute;
 
-  left: calc(50% - 205px);
-  bottom: 2px;
+  left: calc(50% - 114px);
+  bottom: 6px;
 
   width: 62px;
 
@@ -921,23 +716,28 @@ button {
 @media (max-width: 900px) {
 
   .hero {
-    padding: 11vh 7vw 28vh;
+    padding: calc(9vh + 90px) 7vw 6vh;
   }
 
   .hero-content {
-    max-width: 92%;
+    max-width: 94%;
+
+    gap: clamp(18px, 3.2vh, 40px);
   }
 
   .hero-title {
-    font-size: clamp(50px, 11vw, 112px);
+    font-size: clamp(34px, min(7.6vw, 8vh), 72px);
   }
 
-  .hero-scrap-wrap {
-    left: 4vw;
+  /* three columns still fit here — they only get narrower */
+  .hero-lines {
+    gap: clamp(18px, 2.4vw, 34px);
   }
 
-  .hero-sticker {
-    right: 5vw;
+  .hero-note {
+    max-width: 320px;
+
+    gap: 13px;
   }
 }
 
@@ -965,29 +765,54 @@ button {
   }
 
   .menu-button {
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
   }
 
   .hero {
-    min-height: calc(100vh - 70px);
+    /* the nav band is 70px tall down here */
+    margin-top: -70px;
 
-    padding: 8vh 7vw 30vh;
+    min-height: 100vh;
+
+    padding: calc(6vh + 70px) 7vw 5vh;
 
     align-items: flex-start;
   }
 
   .hero-title {
-    font-size: clamp(46px, 15vw, 84px);
+    font-size: clamp(32px, min(11.5vw, 7.2vh), 58px);
+  }
+
+  /* too narrow for three columns — stack the invitations and let
+     them fill the width so the whole opening still lands on one
+     screen without scrolling */
+  .hero-lines {
+    flex-direction: column;
+    align-items: center;
+
+    gap: clamp(12px, 2.2vh, 20px);
+  }
+
+  .hero-note {
+    flex: 0 1 auto;
+    width: 100%;
+    max-width: 460px;
+
+    justify-content: flex-start;
+
+    gap: 12px;
   }
 
   .hero-line {
     font-size: 14px;
+    line-height: 1.6;
   }
 
-  .hero-scrap-wrap,
-  .hero-sticker,
-  .hero-doodle,
+  .hero-button {
+    padding: 11px 20px;
+  }
+
   .hero-arrow {
     display: none;
   }
@@ -1036,19 +861,19 @@ button {
 
 /* -------------------------
    CUSTOM SCROLLBAR
-   Thin, rounded, light beige track with a blue thumb that turns
-   pink on hover. Firefox uses scrollbar-color, WebKit browsers the
-   ::-webkit-scrollbar block — both stay fully functional.
+   Light beige track with a bold dark-pink thumb that lifts to hot pink
+   on hover — intentionally noticeable. Firefox uses scrollbar-color,
+   WebKit browsers the ::-webkit-scrollbar block — both stay functional.
 ------------------------- */
 
 html {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-blue) var(--color-beige-soft);
+  scrollbar-color: var(--color-pink) var(--color-beige-soft);
 }
 
 ::-webkit-scrollbar {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
 }
 
 ::-webkit-scrollbar-track {
@@ -1056,14 +881,14 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-blue);
+  background: var(--color-pink);
 
   border: 3px solid var(--color-beige-soft);
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-pink);
+  background: var(--color-pink-soft);
 }
 
 ::-webkit-scrollbar-corner {
