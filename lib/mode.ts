@@ -19,8 +19,8 @@ export const MODE_KEY = "lakshmi-mode";
 export const MODE_EVENT = "mode:change";
 
 export function getMode(): Mode {
-  if (typeof document === "undefined") return "player";
-  return (document.documentElement.dataset.mode as Mode) || "player";
+  if (typeof document === "undefined") return "recruiter";
+  return (document.documentElement.dataset.mode as Mode) || "recruiter";
 }
 
 export function applyMode(mode: Mode) {
@@ -47,5 +47,5 @@ export function subscribeMode(onChange: () => void) {
 
 /** The current mode, always in sync with <html data-mode>. */
 export function useMode(): Mode {
-  return useSyncExternalStore(subscribeMode, getMode, () => "player" as Mode);
+  return useSyncExternalStore(subscribeMode, getMode, () => "recruiter" as Mode);
 }

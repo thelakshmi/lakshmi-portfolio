@@ -155,6 +155,16 @@ export default function RecruiterContact() {
           </div>
         </div>
       </div>
+
+      {/* closing action at the very end of Recruiter Mode — downloads
+          the resume PDF (placeholder file, replaceable later) */}
+      <div className="rc-resume">
+        <h2 className="rc-contact-heading">Resume</h2>
+
+        <a className="rc-resume-button" href="/resume.pdf" download>
+          Download Resume
+        </a>
+      </div>
     </section>
   );
 }

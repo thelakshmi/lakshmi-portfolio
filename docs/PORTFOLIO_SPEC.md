@@ -56,11 +56,11 @@ If you're in a rush, you can see my resume by clicking the button.
 [button for just viewing]
 If you have some time to spare, you can view my online resume in recruiter mode.
 [button for mode]
-If you have absolutely nothing to do, feel free to view it in the player mode.[continue with the exact text/content I provide next]
-Important: Do not invent or complete the unfinished final sentence. Wait for the exact wording I provide.
+Note: the third invitation (player mode) was removed on request — the hero now offers only the two options above, so entering Player Mode through the toggle lands on exactly those two choices: view the resume, or go back to Recruiter Mode.
 Recruiter / Player Mode Toggle
 Include a persistent mode-switching toggle that allows the user to switch between Recruiter Mode and Player Mode at any point while browsing the website.
 • The toggle should be visible within the website interface, rather than requiring the user to return to the landing page.
+• On a first visit, the website opens in Recruiter Mode; a stored mode choice (if any) takes precedence. Player Mode is reached through this toggle.
 • It should have a clear ON/OFF toggle-style interaction
 • The current mode should be clearly indicated by the toggle.
 • Switching the toggle should immediately transition the user between Recruiter Mode and Player Mode.
@@ -323,6 +323,7 @@ Include:
 • My LinkedIn
 • My GitHub
 Use my actual email address, LinkedIn URL and GitHub link when provided. Do not invent or assume any of them.
+At the very end of Recruiter Mode (after Contact Information), include a Download Resume option that downloads my resume PDF.
 Keep this section professional and uncluttered, consistent with the rest of Recruiter Mode.
 Important: Recruiter Mode should remain focused on presenting my information, projects, skills, and contact options clearly. Do not carry over Player Mode's game mechanics, illustrations, humorous interactions, or decorative elements into this mode.
 

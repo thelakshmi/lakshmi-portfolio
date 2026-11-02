@@ -9,8 +9,8 @@ import { applyMode, type Mode } from "@/lib/mode";
  * Opening / Hero — a full-screen illustrated scene: the painted
  * reference artwork fills the section background as a single
  * decorative layer. Every word on screen is spec copy from
- * docs/PORTFOLIO_SPEC.md (title + three invitation lines); the
- * three CTA buttons act on that copy — open the resume PDF, or
+ * docs/PORTFOLIO_SPEC.md (title + two invitation lines); the
+ * two CTA buttons act on that copy — open the resume PDF, or
  * switch mode and travel down to About. The background layer is
  * decorative only and hidden from assistive technology.
  */
@@ -97,20 +97,6 @@ export default function Hero() {
             <svg className="hero-arrow" viewBox="0 0 62 48">
               <path d="M4 8c18 3 34 11 44 22M48 30l-11-3M48 30l-3-11" />
             </svg>
-          </div>
-
-          <div className="hero-note">
-            <p className="hero-line">
-              If you have absolutely nothing to do, feel free to view it in the
-              player mode.
-            </p>
-            <button
-              className="hero-button is-player"
-              type="button"
-              onClick={() => enterMode("player")}
-            >
-              Player Mode
-            </button>
           </div>
         </div>
       </div>

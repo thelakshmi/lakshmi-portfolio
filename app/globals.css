@@ -503,7 +503,7 @@ button {
   color: var(--color-pink-soft);
 }
 
-/* the three invitations sit side by side along the bottom of the
+/* the two invitations sit side by side along the bottom of the
    frame, so the whole opening reads on one screen and the width of
    the section is actually used */
 .hero-lines {
@@ -512,7 +512,7 @@ button {
   align-items: stretch;
   justify-content: center;
 
-  /* clear separation between the three CTA groups, wider than the
+  /* clear separation between the two CTA groups, wider than the
      15px text-to-button gap inside each group */
   gap: clamp(24px, 3.4vw, 60px);
 }
@@ -586,11 +586,6 @@ button {
   color: var(--color-pink);
 
   box-shadow: 3px 4px 0 rgb(var(--pink-rgb) / 0.6);
-}
-
-/* keeps the left / right / left tilt rhythm across the three CTAs */
-.hero-button.is-player {
-  rotate: -1.2deg;
 }
 
 .hero-button:hover {
@@ -711,7 +706,7 @@ button {
     font-size: clamp(34px, min(7.6vw, 8vh), 72px);
   }
 
-  /* three columns still fit here — they only get narrower */
+  /* both columns still fit here — they only get narrower */
   .hero-lines {
     gap: clamp(18px, 2.4vw, 34px);
   }
@@ -766,7 +761,7 @@ button {
     font-size: clamp(32px, min(11.5vw, 7.2vh), 58px);
   }
 
-  /* too narrow for three columns — stack the invitations and let
+  /* too narrow for columns — stack the invitations and let
      them fill the width so the whole opening still lands on one
      screen without scrolling */
   .hero-lines {

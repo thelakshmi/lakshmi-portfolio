@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 
+import { applyMode } from "@/lib/mode";
 import { about, journey, profile, projects, skills } from "@/lib/content";
 
 /** Experience reads newest-first; education gets pulled out into its own block. */
@@ -13,7 +14,7 @@ export default function ResumeView() {
   return (
     <div className="resume mode-recruiter">
       <div className="resume-bar">
-        <Link className="resume-back" href="/">
+        <Link className="resume-back" href="/" onClick={() => applyMode("player")}>
           ← player mode
         </Link>
 
@@ -122,7 +123,9 @@ export default function ResumeView() {
           <span>
             {about.stats.map((stat) => `${stat.value}${stat.suffix} ${stat.label}`).join(" · ")}
           </span>
-          <Link href="/">player mode →</Link>
+          <Link href="/" onClick={() => applyMode("player")}>
+            player mode →
+          </Link>
         </footer>
       </article>
     </div>

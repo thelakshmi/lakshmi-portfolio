@@ -51,8 +51,9 @@ export const metadata: Metadata = {
 };
 
 /* the active mode lands on <html data-mode> before first paint, so the
-   matching font system is already applied and nothing flashes */
-const modeInit = `(function(){try{var m=localStorage.getItem("lakshmi-mode");document.documentElement.dataset.mode=m==="recruiter"?"recruiter":"player"}catch(e){document.documentElement.dataset.mode="player"}})();`;
+   matching font system is already applied and nothing flashes.
+   First-time visitors land in Recruiter Mode; a stored choice wins. */
+const modeInit = `(function(){try{var m=localStorage.getItem("lakshmi-mode");document.documentElement.dataset.mode=m==="player"?"player":"recruiter"}catch(e){document.documentElement.dataset.mode="recruiter"}})();`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
