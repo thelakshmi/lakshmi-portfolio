@@ -87,7 +87,10 @@
 
 .rc-about-photo img {
   object-fit: cover;
-  object-position: center;
+  /* the current photograph is a full-length portrait with the face
+     in its upper third — anchored so the face sits centred in the
+     circular crop instead of riding high */
+  object-position: center 35%;
 }
 
 .rc-about-intro {
@@ -186,12 +189,10 @@
 
 /* ------------------------------------------------------------------
    SKILLS  (id="skills")
-   The proficiency pattern from the reference image: a category
-   heading, the Introduced / Proficient / Expert scale with its
-   hairline, and one thin bar per skill - the filled portion is
-   score / 10 of the full track (the track is 10/10). Static
-   visualisation: no game mechanics, quizzes, sliders, filtering,
-   hover states or animated scores.
+   The eight provided categories as a two-column grid; each
+   category heading carries its skills as quiet bordered chips.
+   Static list only: no scores, bars, game mechanics, quizzes or
+   filtering.
 ------------------------------------------------------------------- */
 
 .rc-skills {
@@ -201,114 +202,75 @@
   padding: 0 clamp(24px, 8vw, 96px) clamp(88px, 14vh, 160px);
 }
 
+.rc-skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  column-gap: clamp(32px, 5vw, 72px);
+  row-gap: clamp(26px, 3.6vh, 38px);
+
+  align-items: start;
+}
+
+.rc-skill-category {
+  padding-top: clamp(14px, 2vh, 18px);
+
+  border-top: 1px solid var(--line);
+}
+
 .rc-skill-category-name {
-  margin: 0;
+  margin: 0 0 12px;
 
   font-family: var(--font-heading);
 
-  font-size: clamp(15px, 1.8vw, 18px);
+  font-size: clamp(14.5px, 1.6vw, 17px);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  line-height: 1.4;
 
   color: var(--color-ink);
 }
 
-/* header row: category name (left column) | scale labels (over
-   the bar column), closed by the reference's hairline */
-.rc-skill-scale {
-  display: grid;
-  grid-template-columns: minmax(170px, 30%) minmax(0, 1fr);
+.rc-skill-chips {
+  display: flex;
+  flex-wrap: wrap;
 
-  column-gap: clamp(24px, 4vw, 56px);
-  align-items: end;
-}
+  gap: 8px;
 
-.rc-skill-scale-labels {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--line);
-}
-
-.rc-skill-scale-labels span {
-  font-family: var(--font-body);
-
-  font-size: clamp(11.5px, 1.2vw, 13px);
-  font-weight: 500;
-
-  color: var(--color-slate);
-}
-
-.rc-skill-scale-labels span:nth-child(2) {
-  justify-self: center;
-}
-
-.rc-skill-scale-labels span:nth-child(3) {
-  justify-self: end;
-}
-
-.rc-skill-list {
   margin: 0;
-  padding: clamp(18px, 2.6vh, 28px) 0 0;
+  padding: 0;
 
   list-style: none;
-
-  display: grid;
-  row-gap: clamp(16px, 2.4vh, 24px);
 }
 
-/* skill row: name (left column) | proficiency bar (scale column) */
-.rc-skill-row {
-  display: grid;
-  grid-template-columns: minmax(170px, 30%) minmax(0, 1fr);
+.rc-skill-chip {
+  padding: 6px 14px;
 
-  column-gap: clamp(24px, 4vw, 56px);
-  align-items: center;
-}
+  border: 1px solid var(--line);
+  border-radius: 999px;
 
-.rc-skill-name {
+  background: var(--color-beige-panel);
+
   font-family: var(--font-body);
 
-  font-size: clamp(14.5px, 1.5vw, 16px);
+  font-size: 14px;
   font-weight: 400;
-  line-height: 1.45;
+  line-height: 1.5;
 
   color: var(--color-ink);
+
+  transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-/* full unfilled track = 10/10 */
-.rc-skill-track {
-  position: relative;
-
-  height: 2px;
-
-  background: var(--line);
+.rc-skill-chip:hover {
+  border-color: var(--color-blue);
+  color: var(--color-blue);
 }
 
-/* filled portion = score / 10 of the track (width set inline) */
-.rc-skill-fill {
-  position: absolute;
-  left: 0;
-  top: 0;
-
-  height: 100%;
-
-  background: var(--color-blue);
-}
-
-/* stack name above its bar on small screens - readability over
-   the desktop two-column arrangement, nothing hidden */
+/* categories collapse to a single readable column on small
+   screens - nothing hidden */
 @media (max-width: 760px) {
-  .rc-skill-scale,
-  .rc-skill-row {
+  .rc-skill-grid {
     grid-template-columns: 1fr;
-
-    row-gap: 8px;
-  }
-
-  .rc-skill-scale {
-    align-items: start;
   }
 }
 

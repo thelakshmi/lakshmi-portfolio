@@ -291,25 +291,19 @@ Status: In progress · Individual project
 ---
 
 SKILLS
-Display my technical and professional skills in a clean visual skill-level system.
-Each skill should have a horizontal bar indicating my self-assessed proficiency.
-The score is out of 10, and the length of the bar should correspond directly to the score.
-Use these exact scores:
-Skill Score
-Java 6/10
-Python 6/10
-C/C++ 4/10
-HTML 7/10
-CSS 6/10
-Javascript 5/10
-Node.js 5/10
-Microsoft Suite (Excel, PowerPoint, etc.) 7/10
-Formal/Technical Presentations 6.5/10
-IoT 5/10
-Categorize the skills according to the category structure shown in the provided reference, and display the proficiency bars according to the scores above.
-Do not change the scores or infer higher proficiency levels.
-Skills category reference:
-docs/recruiter-skills-reference.png
+Display my technical and professional skills as a two-column grid of eight categories.
+Each category is a heading with its skills shown as quiet bordered chips (rounded, hairline border, panel background).
+Static list only: no scores, proficiency bars, game mechanics, quizzes, filtering or animated counters. The old Introduced / Proficient / Expert bar system and its scores are retired.
+Use these categories and skills exactly as provided:
+
+Programming Languages: Java, Python, C, C++
+Frontend Development: HTML, CSS, JavaScript, React, Next.js, Tailwind CSS
+Backend Development: Node.js, Express
+Databases: MySQL, MongoDB, Supabase
+AI / AI Application Development: Python, Hugging Face (project experience)
+Tools & Platforms: Git, GitHub, VS Code, Vercel
+CS Fundamentals: Data Structures and Algorithms, Object-Oriented Programming, DBMS, Operating Systems, Computer Networks
+Design: Figma
 
 ---
 
@@ -325,8 +319,9 @@ The section should communicate that I am open to collaboration and interested in
 Contact Information
 Include:
 • My email
+• My LinkedIn
 • My GitHub
-Use my actual email address and GitHub link when provided. Do not invent or assume either one.
+Use my actual email address, LinkedIn URL and GitHub link when provided. Do not invent or assume any of them.
 Keep this section professional and uncluttered, consistent with the rest of Recruiter Mode.
 Important: Recruiter Mode should remain focused on presenting my information, projects, skills, and contact options clearly. Do not carry over Player Mode's game mechanics, illustrations, humorous interactions, or decorative elements into this mode.
 

@@ -4,12 +4,10 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 
 import { sendAnonymousMessage } from "@/lib/messages";
 
-/* No real email address has been provided in the specification or the
-   project yet, so no placeholder address is shown: fill this constant
-   in when the real address is supplied and the Email row renders on
-   its own. */
-const EMAIL = "";
-
+/* Contact details from the provided Recruiter Mode material —
+   the Email row renders now that a real address is supplied. */
+const EMAIL = "lakshmi090506@gmail.com";
+const LINKEDIN = "https://www.linkedin.com/in/lakshmi-s-656435360/";
 const GITHUB = "https://github.com/thelakshmi";
 
 type Status = "idle" | "sending" | "sent" | "failed";
@@ -130,6 +128,18 @@ export default function RecruiterContact() {
                 </a>
               </div>
             ) : null}
+
+            <div className="rc-contact-row">
+              <span className="rc-contact-label">LinkedIn</span>
+              <a
+                className="rc-contact-link"
+                href={LINKEDIN}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {LINKEDIN}
+              </a>
+            </div>
 
             <div className="rc-contact-row">
               <span className="rc-contact-label">GitHub</span>
