@@ -433,8 +433,7 @@ export const intro = {
     {
       id: "recruiter",
       label: "Recruiter mode",
-      caption:
-        "If you have some time to spare, you can view my online resume in recruiter mode.",
+      caption: "If you want to go back, you can return to recruiter mode.",
       href: "/resume",
     },
     {

@@ -54,9 +54,9 @@ Hero text — use exactly as written below. Do not rewrite, shorten, paraphrase,
 Welcome to my personal website!
 If you're in a rush, you can see my resume by clicking the button.
 [button for just viewing]
-If you have some time to spare, you can view my online resume in recruiter mode.
+If you want to go back, you can return to recruiter mode.
 [button for mode]
-Note: the third invitation (player mode) was removed on request — the hero now offers only the two options above, so entering Player Mode through the toggle lands on exactly those two choices: view the resume, or go back to Recruiter Mode.
+Note: the third invitation (player mode) was removed on request — the hero now offers only the two options above, so entering Player Mode through the toggle lands on exactly those two choices: view the resume, or go back to Recruiter Mode. The second invitation was also reworded on request to simply point back to Recruiter Mode instead of describing the online resume.
 Recruiter / Player Mode Toggle
 Include a persistent mode-switching toggle that allows the user to switch between Recruiter Mode and Player Mode at any point while browsing the website.
 • The toggle should be visible within the website interface, rather than requiring the user to return to the landing page.

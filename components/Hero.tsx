@@ -83,8 +83,7 @@ export default function Hero() {
 
           <div className="hero-note">
             <p className="hero-line">
-              If you have some time to spare, you can view my online resume in
-              recruiter mode.
+              If you want to go back, you can return to recruiter mode.
             </p>
             <button
               className="hero-button is-mode"
