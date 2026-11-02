@@ -142,8 +142,8 @@
 /* -------------------------
    ABOUT
    Spacious two-part composition: the tilted photograph on one
-   half, the short introduction on the other. Story Time is
-   revealed underneath, with its illustration alongside.
+   half, the short introduction on the other. A Little About Me
+   is revealed underneath, with its illustration alongside.
 ------------------------- */
 
 .about-grid {
@@ -228,7 +228,7 @@
   text-decoration-color: rgb(var(--blue-rgb) / 0.6);
 }
 
-/* Story Time — revealed by "Want to know more?" */
+/* A Little About Me — revealed by "Want to know more?" */
 .about-story {
   margin-top: clamp(44px, 6vh, 76px);
 

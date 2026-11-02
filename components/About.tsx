@@ -77,45 +77,48 @@ export default function About() {
       {/* revealed by "Want to know more?" */}
       {storyOpen && (
         <div className="about-story" id="story-time">
-          <h2 className="story-title">Story Time</h2>
+          <h2 className="story-title">A Little About Me</h2>
 
           <div className="story-row">
             <div className="story-body">
               <p>
-                I’m Lakshmi S, a 3rd-year engineering student from India,
-                fascinated by technology, design, and pretty much anything that
-                makes me stop and ask, “but why?”
+                I&apos;ve always been the kind of person who likes to go a
+                little beyond what&apos;s asked.
               </p>
               <p>
-                My curiosity for tech started back in high school, when I was
-                usually among the first to finish the programs in our computer
-                lab—and almost always ended up adding something extra to what
-                was asked. That habit somehow stuck. Today, I love building
-                things that are useful, but I also love making them a little
-                more interesting than they need to be. Web design is where that
-                side of me comes alive: funky interactions, unexpected details,
-                and the endless question of “what else can I add to make this
-                better?”
+                Back in high school, I&apos;d finish a programming problem in
+                the computer lab and start thinking about what else I could do
+                with it. I guess not much has changed. I&apos;m now a
+                third-year engineering student, and I still enjoy taking an
+                idea, building something out of it, and finding ways to make it
+                a little better or more interesting.
               </p>
               <p>
-                I’m currently exploring AI and ML, especially the mathematics
-                behind them. Outside of tech, you’ll probably find me reading
-                about philosophy, psychology, and the strange ways our minds
-                work—placebo effects, paradoxes, mental shortcuts, and other
-                rabbit holes I probably didn&apos;t need to fall into.
+                I particularly enjoy web development. I like the mix of logic
+                and creativity it involves, and how something that starts as a
+                rough idea can eventually become something people can actually
+                use.
               </p>
               <p>
-                I want to learn a little bit of everything: from whether
-                consciousness could exist without a brain to whether there could
-                be another version of us living in a parallel universe. I
-                collect random knowledge, watch movies that leave me thinking
-                long after they end, and genuinely enjoy not knowing
-                something—because it gives me something new to figure out.
+                I&apos;m also exploring AI and machine learning, especially the
+                maths behind how they work. But my interests don&apos;t stop at
+                technology. I could be reading about how neural networks learn
+                one day and wondering about consciousness, parallel universes,
+                or some completely unrelated question the next.
               </p>
               <p>
-                I’m probably a jack of all trades, master of none—and I’m quite
-                alright with that. I like being curious, creative, and
-                constantly learning.
+                Outside tech, I enjoy reading about philosophy and psychology,
+                watching movies that leave me thinking long after they&apos;ve
+                ended, and going down random internet rabbit holes. Sometimes I
+                start looking up one thing and end up learning about five
+                others along the way.
+              </p>
+              <p>
+                I enjoy knowing a little about a lot of things, and I
+                don&apos;t think I&apos;ll ever run out of things to be curious
+                about. There&apos;s always something new to learn, something to
+                try, or some idea worth exploring. And that&apos;s what makes
+                things interesting for me.
               </p>
             </div>
 

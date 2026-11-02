@@ -105,9 +105,9 @@ The About section should contain only 3–4 sentences of introductory informatio
 Want to Know More
 Below the short introduction, include a “Want to know more?” option.
 When clicked, it should reveal/open a longer description about me titled:
-Story Time
-The Story Time section should contain a slightly more detailed and personal description of me.
-Alongside the Story Time content, include a playful illustration of a girl falling asleep while reading it, as a small visual joke.
+A Little About Me
+The A Little About Me section should contain a slightly more detailed and personal description of me.
+Alongside the A Little About Me content, include a playful illustration of a girl falling asleep while reading it, as a small visual joke.
 The illustration should feel integrated into the section rather than being a random floating decoration.
 Important: Do not add extra content, cards, floating elements, sidebars, navigation bars, decorative objects, or additional interactions to the About section unless explicitly specified later.
 
@@ -120,16 +120,18 @@ This is the only text visible initially in the About section.
 “Want to know more?” Interaction
 Include a “Want to know more?” option below the short introduction.
 When the user clicks it, reveal/open the longer section titled:
-Story Time
-When the Story Time section opens, the page should scroll down to it.
+A Little About Me
+When the A Little About Me section opens, the page should scroll down to it.
 Include the following content exactly as written:
-I’m Lakshmi S, a 3rd-year engineering student from India, fascinated by technology, design, and pretty much anything that makes me stop and ask, “but why?”
-My curiosity for tech started back in high school, when I was usually among the first to finish the programs in our computer lab—and almost always ended up adding something extra to what was asked. That habit somehow stuck. Today, I love building things that are useful, but I also love making them a little more interesting than they need to be. Web design is where that side of me comes alive: funky interactions, unexpected details, and the endless question of “what else can I add to make this better?”
-I’m currently exploring AI and ML, especially the mathematics behind them. Outside of tech, you’ll probably find me reading about philosophy, psychology, and the strange ways our minds work—placebo effects, paradoxes, mental shortcuts, and other rabbit holes I probably didn't need to fall into.
-I want to learn a little bit of everything: from whether consciousness could exist without a brain to whether there could be another version of us living in a parallel universe. I collect random knowledge, watch movies that leave me thinking long after they end, and genuinely enjoy not knowing something—because it gives me something new to figure out.
-I’m probably a jack of all trades, master of none—and I’m quite alright with that. I like being curious, creative, and constantly learning.
-Story Time Illustration
-Alongside the Story Time content, include a playful illustration of a girl who has fallen asleep while reading, as a humorous visual representation of spending too much time reading/learning.
+I've always been the kind of person who likes to go a little beyond what's asked.
+Back in high school, I'd finish a programming problem in the computer lab and start thinking about what else I could do with it. I guess not much has changed. I'm now a third-year engineering student, and I still enjoy taking an idea, building something out of it, and finding ways to make it a little better or more interesting.
+I particularly enjoy web development. I like the mix of logic and creativity it involves, and how something that starts as a rough idea can eventually become something people can actually use.
+I'm also exploring AI and machine learning, especially the maths behind how they work. But my interests don't stop at technology. I could be reading about how neural networks learn one day and wondering about consciousness, parallel universes, or some completely unrelated question the next.
+Outside tech, I enjoy reading about philosophy and psychology, watching movies that leave me thinking long after they've ended, and going down random internet rabbit holes. Sometimes I start looking up one thing and end up learning about five others along the way.
+I enjoy knowing a little about a lot of things, and I don't think I'll ever run out of things to be curious about. There's always something new to learn, something to try, or some idea worth exploring. And that's what makes things interesting for me.
+Note: this copy and the “A Little About Me” title replaced the earlier “Story Time” content on request.
+A Little About Me Illustration
+Alongside the A Little About Me content, include a playful illustration of a girl who has fallen asleep while reading, as a humorous visual representation of spending too much time reading/learning.
 The illustration should complement the section and feel intentionally placed within the composition, not like an unrelated floating decoration.
 Do not add any additional About text or invented personal information.
 PROJECTS SECTION
