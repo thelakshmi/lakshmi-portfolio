@@ -206,24 +206,6 @@ button {
   z-index: 20;
 }
 
-/* wordmark styling — the header no longer renders a wordmark
-   (removed in the correction pass); this now styles the Footer's
-   own "lakshmi." mark, which stays untouched. */
-.logo {
-  font-family: var(--font-body);
-
-  font-size: 25px;
-
-  font-weight: 800;
-
-  letter-spacing: -0.04em;
-}
-
-.logo span {
-  color: var(--accent-text);
-}
-
-
 /* -------------------------
    PERSISTENT CONTROLS
    The top-right cluster is fixed so the mode switch stays

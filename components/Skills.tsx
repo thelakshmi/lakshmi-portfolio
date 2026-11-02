@@ -8,7 +8,7 @@ import { useScrollReveal } from "@/lib/useScrollReveal";
    LAKSHMI'S LIFE / CAREER — SIDE-SCROLLING GAME
    (PORTFOLIO_SPEC.md — the Skills Game section, id="skills")
 
-   One run from 2006 to 2026: exactly 3 hurdles to jump and exactly
+   One run from 2006 to 2026: exactly 2 hurdles to jump and exactly
    5 achievements to collect, in timeline order, while the
    environment shifts day -> dusk -> night -> darkness and the run
    ends on "TO BE CONTINUED...". Running into a hurdle freezes the
@@ -57,22 +57,6 @@ const HURDLES = [
           <path d="M22 18H40M22 25H40M22 32H35" stroke="#1a2440" strokeWidth="1.6" opacity="0.5" strokeLinecap="round" />
           <path d="M23 42l4 4l8 -9" fill="none" stroke="#2a5ca8" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
         </g>
-      </svg>
-    ),
-  },
-  {
-    at: 24.5,
-    width: 62,
-    height: 48,
-    label: "Hostel Life",
-    art: (
-      <svg width="62" height="48" viewBox="0 0 62 48" aria-hidden="true">
-        <ellipse cx="31" cy="46" rx="27" ry="2.6" fill="#1a2440" opacity="0.14" />
-        <path d="M24 14a7 7 0 0 1 14 0" fill="none" stroke="#1a2440" strokeWidth="2.6" strokeLinecap="round" />
-        <rect x="5" y="13" width="52" height="33" rx="4" fill="#2a5ca8" stroke="#1a2440" strokeWidth="2" />
-        <rect x="5" y="26" width="52" height="5" fill="#f5f3e7" opacity="0.85" />
-        <rect x="27" y="13" width="8" height="33" fill="#d8006f" stroke="#1a2440" strokeWidth="1.5" />
-        <circle cx="31" cy="28.5" r="4" fill="#f9f7ee" stroke="#1a2440" strokeWidth="1.8" />
       </svg>
     ),
   },
@@ -590,7 +574,7 @@ export default function Skills() {
             </div>
           ))}
 
-          {/* the three hurdles */}
+          {/* the two hurdles */}
           {HURDLES.map((hurdle) => (
             <div
               className="game-obj game-hurdle"
@@ -664,7 +648,6 @@ export default function Skills() {
             <ul>
               <li>ICSE Board Exams — 2022</li>
               <li>12th Board Exams — 2024</li>
-              <li>Hostel Life — 2024–present</li>
             </ul>
           </div>
           <div className="game-overview-col game-overview-col--achieved">

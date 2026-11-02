@@ -2351,47 +2351,6 @@
   color: var(--accent-text);
 }
 
-.footer-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  gap: 24px;
-  flex-wrap: wrap;
-
-  padding: 24px 8vw 0 12vw;
-}
-
-.footer-top {
-  font-family: var(--font-body);
-
-  font-size: 11px;
-
-  color: var(--muted);
-
-  transition: color 0.25s ease;
-}
-
-.footer-top:hover {
-  color: var(--accent-text);
-}
-
-.footer-sub {
-  padding-top: 6px;
-}
-
-.footer-sub span {
-  font-family: var(--font-body);
-
-  font-size: 10px;
-
-  color: var(--muted);
-}
-
-.footer-sub .footer-hint {
-  color: var(--accent-text);
-}
-
 
 /* -------------------------
    PAGE CHROME
@@ -2443,10 +2402,6 @@
   .hero + .section::before {
     left: 7vw;
     right: 7vw;
-  }
-
-  .footer-row {
-    padding: 24px 7vw 0;
   }
 
   /* the collection folds to two columns, staggered */
@@ -2542,13 +2497,6 @@
 
   .footer {
     padding-bottom: 150px;
-  }
-
-  .footer-row {
-    flex-direction: column;
-    align-items: flex-start;
-
-    gap: 12px;
   }
 }
 

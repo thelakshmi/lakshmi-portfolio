@@ -182,19 +182,18 @@ Core Game Concept
 • Environment: Changes according to the phase of my life represented by the timeline.
 Keep the game simple and personal. It should feel like a playful representation of my journey rather than a complicated video game.
 🏃 Hurdles
-There should be exactly 3 hurdles:
+There should be exactly 2 hurdles:
 
 1. ICSE Board Exams — 2022
 2. 12th Board Exams — 2024
-3. Hostel Life — 2024–present
    These should appear as physical obstacles on the running path that the player has to jump over or avoid.
    ⭐ Achievements
    There should be exactly 5 achievements:
-4. Learnt to Walk — 2008
-5. Top 10 ICSE Rank — 2022
-6. 100/100 in Mathematics — 2024
-7. Became Student Placement Coordinator (SPC) — 2024
-8. Selected for Samsung Innovation Campus — 2025
+3. Learnt to Walk — 2008
+4. Top 10 ICSE Rank — 2022
+5. 100/100 in Mathematics — 2024
+6. Became Student Placement Coordinator (SPC) — 2024
+7. Selected for Samsung Innovation Campus — 2025
    These should appear as collectible glowing objects/stars floating above the running path, requiring the player to jump and collect them.
    Timeline
    The game should visually represent the journey progressing from 2006 to 2026.
