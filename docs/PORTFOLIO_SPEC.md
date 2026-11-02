@@ -140,6 +140,7 @@ Card Interaction
 • The reverse side of the card should reveal the project's information.
 • The interaction should feel playful and tactile, like physically turning over a card.
 • The animation should be smooth and intentional, not overly fast or chaotic.
+• The reverse side also carries a GitHub button that opens the project's repository in a new tab.
 Project Cards — Exact Content
 Use the following project information exactly as written. Do not rewrite, paraphrase, add, or remove information.
 GradTrack
@@ -270,6 +271,7 @@ The layout should provide enough visual hierarchy to distinguish:
 • Description
 • Technology stack
 Keep the section clean and uncluttered. It should be easy for a recruiter to quickly understand what each project is and what my role was.
+Each project entry includes a GitHub button linking to the project's repository, opening in a new tab.
 NextStep
 A full-stack web application I built with my team to make the Letter of Recommendation process easier for students and faculty. It replaces the usual manual process with a platform where students can submit requests and faculty can review and approve them.
 This was one of my first projects where I got to work with backend APIs, databases, and the frontend together, and understand how all the pieces of a web application fit.

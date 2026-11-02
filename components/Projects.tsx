@@ -6,13 +6,15 @@ import { useScrollReveal } from "@/lib/useScrollReveal";
 
 /* The four Player Mode projects — exact copy from PORTFOLIO_SPEC.md.
    Front of the card carries the title + its illustrated mark, the
-   reverse reveals the project information on hover/focus. */
+   reverse reveals the project information on hover/focus, with a
+   GitHub button to the project's repository. */
 const PROJECTS = [
   {
     title: "GradTrack",
     description:
       "LOR management platform built with my team to simplify requests and approvals between students and faculty.",
     technologies: "Node.js · MySQL · MongoDB",
+    repo: "https://github.com/thelakshmi/lakshmi-portfolio",
     art: (
       <svg className="card-art" viewBox="0 0 120 76" aria-hidden="true">
         <path
@@ -45,6 +47,7 @@ const PROJECTS = [
     description:
       "E-commerce website for a startup, where I handled the frontend and worked directly with the client.",
     technologies: "Next.js · CSS · Supabase",
+    repo: "https://github.com/thelakshmi/lakshmi-portfolio",
     art: (
       <svg className="card-art" viewBox="0 0 120 76" aria-hidden="true">
         <circle
@@ -66,6 +69,7 @@ const PROJECTS = [
     description:
       "E-commerce platform for a wellness startup. I’m working on the backend and payment integration.",
     technologies: "Next.js · Supabase · Payments",
+    repo: "https://github.com/thelakshmi/lakshmi-portfolio",
     art: (
       <svg className="card-art" viewBox="0 0 120 76" aria-hidden="true">
         <path
@@ -98,6 +102,7 @@ const PROJECTS = [
     description:
       "An ongoing 8-project journey exploring RAG, agents, fine-tuning, evaluation, and multimodal AI.",
     technologies: "Python · LLMs · RAG · Agents",
+    repo: "https://github.com/thelakshmi/ai-study-assistant",
     art: (
       <svg className="card-art" viewBox="0 0 120 76" aria-hidden="true">
         <path
@@ -153,6 +158,14 @@ export default function Projects() {
               <div className="project-card-face project-card-back">
                 <p>{project.description}</p>
                 <span className="project-tech">{project.technologies}</span>
+                <a
+                  className="project-github"
+                  href={project.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub <span aria-hidden="true">↗</span>
+                </a>
               </div>
             </div>
           </article>

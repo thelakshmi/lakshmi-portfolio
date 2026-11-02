@@ -728,7 +728,10 @@
 }
 
 .project-card:hover .project-card-inner,
-.project-card:focus-visible .project-card-inner {
+.project-card:focus-visible .project-card-inner,
+/* the reverse carries a GitHub link — focus anywhere inside must
+   keep the card open so the link stays reachable by keyboard */
+.project-card:focus-within .project-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -828,6 +831,45 @@
   font-weight: 500;
 
   color: var(--color-blue);
+}
+
+/* GitHub button on the reverse of each card — same hand-drawn
+   ink border as the card itself, blue on hover */
+.project-github {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 5px 14px;
+
+  border: 1.5px solid var(--color-ink);
+  border-radius: 999px;
+
+  background: transparent;
+
+  font-family: var(--font-body);
+
+  font-size: clamp(11.5px, 0.9vw, 12.5px);
+  font-weight: 500;
+
+  color: var(--color-ink);
+  text-decoration: none;
+
+  transition: background 0.2s ease, border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.project-github:hover {
+  border-color: var(--color-blue);
+  background: var(--color-blue);
+  color: var(--color-white);
+}
+
+.project-github:focus-visible {
+  outline: 2px solid var(--color-blue);
+  outline-offset: 3px;
 }
 
 
