@@ -121,6 +121,7 @@ This is the only text visible initially in the About section.
 Include a “Want to know more?” option below the short introduction.
 When the user clicks it, reveal/open the longer section titled:
 Story Time
+When the Story Time section opens, the page should scroll down to it.
 Include the following content exactly as written:
 I’m Lakshmi S, a 3rd-year engineering student from India, fascinated by technology, design, and pretty much anything that makes me stop and ask, “but why?”
 My curiosity for tech started back in high school, when I was usually among the first to finish the programs in our computer lab—and almost always ended up adding something extra to what was asked. That habit somehow stuck. Today, I love building things that are useful, but I also love making them a little more interesting than they need to be. Web design is where that side of me comes alive: funky interactions, unexpected details, and the endless question of “what else can I add to make this better?”

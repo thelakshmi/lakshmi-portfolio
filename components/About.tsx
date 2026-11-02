@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 
 import { useScrollReveal } from "@/lib/useScrollReveal";
@@ -15,6 +15,15 @@ export default function About() {
 
   /* the "Want to know more?" reveal */
   const [storyOpen, setStoryOpen] = useState(false);
+
+  /* opening mounts the story below the fold — glide down to it.
+     behavior is left to the CSS scroll-behavior, so reduced
+     motion gets an instant jump instead of a smooth glide */
+  useEffect(() => {
+    if (!storyOpen) return;
+
+    document.getElementById("story-time")?.scrollIntoView({ block: "start" });
+  }, [storyOpen]);
 
   useScrollReveal(rootRef);
 

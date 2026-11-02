@@ -232,6 +232,10 @@
 .about-story {
   margin-top: clamp(44px, 6vh, 76px);
 
+  /* the click scrolls this into view; keep its top clear of the
+     fixed mode-switch / menu cluster in the corner */
+  scroll-margin-top: 90px;
+
   animation: about-story-in 0.55s ease both;
 }
 
