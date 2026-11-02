@@ -161,7 +161,9 @@
   justify-self: center;
 
   width: 100%;
-  max-width: 460px;
+  /* small rectangle beside the intro — was 460px, kept well under
+     half the column so the text stays the focal point */
+  max-width: 320px;
 
   aspect-ratio: 4 / 5;
 
